@@ -1,0 +1,115 @@
+/* --- HEADER --- */
+
+body {
+    margin-bottom: 0.5rem;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.admin__header {
+    border-bottom: 1px solid black;
+}
+
+.admin__header--list {
+    list-style: none;
+}
+
+.admin__header--list-item+.admin__header--list-item {
+    margin-left: 1em;
+}
+
+.adminmenu {
+    margin-top: 0.5rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+
+/* --- TABLE --- */
+
+.clear::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.delete__icon,
+.edit__icon,
+.view__icon {
+    font-size: 1.5em;
+}
+
+.delete__icon {
+    color: #ff4444;
+}
+
+.view__icon {
+    color: #3de95a;
+}
+
+tr {
+    background-color: rgb(240, 194, 68);
+}
+
+.trhead {
+    background-color: rgb(240, 127, 22);
+}
+
+
+/* --- MODAL --- */
+
+input[type="checkbox"].switch {
+    font-size: 30px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 2em;
+    height: 0.8em;
+    background: #ddd;
+    border-radius: 2em;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+input[type="checkbox"].switch:checked {
+    background: #0ebeff;
+}
+
+input[type="checkbox"].switch:after {
+    position: absolute;
+    content: "";
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 .25em rgba(0, 0, 0, .3);
+    box-shadow: 0 0 .25em rgba(0, 0, 0, .3);
+    -webkit-transform: scale(.7);
+    transform: scale(.7);
+    left: 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+input[type="checkbox"].switch:checked:after {
+    left: calc(100% - 0.8em);
+}
+
+#user_update_profil_roles {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0.5rem;
+}

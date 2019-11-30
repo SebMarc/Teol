@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil Membre{% endblock %}
+
+
+
+{% block body %}
+
+
+
+	<div class="d-flex">
+		<div class="user-form">
+			
+			{% if is_granted(['ROLE_MEMBER','ROLE_TECH', 'ROLE_ADMIN']) %}
+				<h1 class="text-white">Mon Profil</h1>
+				{# Détails du profil du User loggué #}
+				<p>
+					Utilisateur : {{user.name}}
+				</p>
+				<p>
+					Email : {{user.email}}
+				</p>
+				<p>
+					Nom : {{user.lastname}}
+				</p>
+				<p>
+					Prenom : {{user.firstname}}
+				</p>
+				<p>
+					Adresse : {{user.adress}}
+				</p>
+				<p>
+					Code Postal : {{user.postalCode}}
+				</p>
+				<p>
+					Ville : {{user.city}}
+				</p>
+
+				<p>
+					Crée le : {{user.createdAt | date('d-m-Y')}}
+				</p>
+				<p>
+					Mis à jour le : {{user.updatedAt | date('d-m-Y')}}
+				</p>
+			
+				<p>
+					Droits :       {% for role in user.roles %}
+						<span> - {{ role }}  </span>
+					{% endfor %}
+				</p>
+				<p>
+					Technicien : {{user.technicien}}
+				</p>
+				
+		</div>
+		<div class="profilchoice w-50">
+			<button type="button" class="btn btn-warning btn-lg btn-block">Encours</button>
+			<button type="button" class="btn btn-warning btn-lg btn-block">Mes dernières commandes</button>
+			<button type="button" class="btn btn-warning btn-lg btn-block">Mes produits</button>
+			<button type="button" class="btn btn-warning btn-lg btn-block">Mes tarifs</button>
+		
+			{# Flash Message{#}
+			{% for label, messages in app.flashes(['success', 'warning', 'danger', 'info']) %}
+				{% for message in messages %}
+					<div class="alert alert-{{ label }} flash text-center mt-3">
+					{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %} 
+		</div>
+		{% endif %}
+	</div>
+{% endblock %}

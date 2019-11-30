@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Navbar Example</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   </head>
+
+   <body>
+    <nav class=" headermenu navbar navbar-expand-sm  navbar-dark d-flex justify-content-between ">
+        <div class="d-flex">
+         <!-- Brand -->
+            <a class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('asset/image/logoteol.png') }}" alt="Logo Teol"></a>
+            
+ 
+         <!-- Links -->
+            <ul class="navbar-nav align-items-end">
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">
+                    La coopérative
+                    </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ path('homepage') }}#presentation">Présentation</a>
+                            <a class="dropdown-item" href="{{ path('homepage') }}#domaine">Domaines d'activité</a>
+                            <a class="dropdown-item" href="{{ path('homepage') }}#implantation">Notre implantation</a>
+                            
+                        </div>
+                </li>
+
+               
+
+                {# Affichage si Role Member #}
+                {% if is_granted('ROLE_MEMBER') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Adhérent
+                    </a>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('user_profil')}}">Mon compte</a>
+                        </div>
+                </li>
+                {% endif %}{#}
+
+                {# Affichage Technicien si Role Tech #}
+                 {% if is_granted('ROLE_TECH') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">
+                    Technicien
+                    </a>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('tech_profil') }}">Mon compte</a>
+                        <a class="dropdown-item" href="#">Documentation</a>
+                        </div>
+                </li>
+                {% endif %}
+
+                {# Magasins #}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">
+                    Nos magasins
+                    </a>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Charolles</a>
+                        <a class="dropdown-item" href="#">Saint Yvan</a>
+                        <a class="dropdown-item" href="#">Toulon-sur-Arroux</a>
+                        <a class="dropdown-item" href="#">Blanzy</a>
+                        <a class="dropdown-item" href="#">Dompierre les Ormes</a>
+                        <a class="dropdown-item" href="#">Palinges</a>
+                        <a class="dropdown-item" href="#">Issy l'Evêque</a>
+                        <a class="dropdown-item" href="#">Luzy</a>
+                        <a class="dropdown-item" href="#">Molinet</a>
+                        </div>
+                </li>
+
+                {#Offre du Moment#}
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">
+                        Offres du Moment
+                        </a>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Plante d'Exterieur</a>
+                        <a class="dropdown-item" href="#">Plante d'Interieur</a>
+                        <a class="dropdown-item" href="#">Abris, Serre & Amenagement</a>
+                        <a class="dropdown-item" href="#">Produits de Jardin</a>
+                        <a class="dropdown-item" href="#">Outils de Jardin</a>
+                        <a class="dropdown-item" href="#">Mobilier, Jeux, Barbecues</a>
+                        <a class="dropdown-item" href="#">Animalerie</a>
+                        
+                        </div>
+                </li>        
+
+                {# Affichage si Role Admin #}
+                {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                <a class="nav-link text-white" href="#">Administrateur</a>
+                </li>
+                 {% endif %}
+
+                <li class="nav-item">
+                <a class="nav-link text-white" href="#">Actualités</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-white" href="#">Infos pratiques</a>
+                </li>
+    </div>
+                {#Offre du Menu navigation#}
+                <div class ="d-flex ">
+                <li class="nav-item ">
+                    <a href="{{ path('homepage') }}" class="nav-link d-flex align-items-center text-white">
+                        <i class="fa fa-home mr-2 text-white" aria-hidden="true" ></i>
+                        Accueil <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <a href="#" class="nav-link d-flex align-items-center text-white">
+                        <i class="fas fa-envelope mr-2 " aria-hidden="true" ></i>
+                        Contact <span class="sr-only">(current)</span>
+                    </a>
+                <li class="nav-item">
+                        <div class="dropdown">
+                            <a href="#" class="nav-link d-flex align-items-center dropdown-toggle text-white" role="button"
+                            id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                                {% if app.user %}
+                                    Mon Espace
+                                {% else %}
+                                    Identification
+                                {% endif %}
+                                <span class="sr-only">(current)</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                               {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        {% if is_granted('ROLE_TECH') %}
+                                            <a href="{{ path('tech_profil') }}" class="dropdown-item">Mon compte</a>
+                                            <a href="#" class="dropdown-item">Documentation</a>
+                                        {% endif %} 
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a href="{{ path('admin_homepage') }}" class="dropdown-item">Administration</a>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_MEMBER') %}
+                                            <a href="{{ path('user_profil') }}" class="dropdown-item">Mon profil</a>
+                                        {% endif %}
+                                   
+                                    <a href="{{ path('app_logout') }}" class="dropdown-item">Me déconnecter</a>
+                                {% else %}
+                                    <a href="{{ path('app_login') }}" class="dropdown-item">Me connecter</a>
+                                    <a href="#" class="dropdown-item">M'inscrire</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path('app_logout') }}" class="nav-link d-flex align-items-center text-danger">
+                        <i class="fas fa-sign-out-alt mr-2 " aria-hidden="true" ></i>
+                        Deconnexion <span class="sr-only">(current)</span>
+                    </a>
+                   {% endif %}
+                </li>
+                    </div>
+            </ul>
+            
+ 
+        </nav>
+    </body>

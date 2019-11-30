@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue chez Teol !{% endblock %}
+
+{% block body %}
+
+<div>
+{# Flash Message{#}
+    {% for label, messages in app.flashes(['success', 'warning', 'danger', 'info']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} flash text-center mt-5">
+            {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+
+<div class="presentation mx-4  p-3 border rounded border-warning  float-right mb-3">
+        
+<h2 class="text-center" id ="domaine">Domaines d'activité</h2>
+<h4>Productions animales</h4>
+<img src="{{ asset('asset/image/vache.jpg') }}" alt="Photo Charolaise" class="float-left rounded img-circle mr-2 " width="200" height="150">
+<p>Valorisation de la production céréalière des adhérents.
+Deux outils récents complémentaires qui apportent la possibilité d'offrir une très large gamme (mash + granulés et mixtes).
+
+Les usines de Charolles Aliments et Luzy sont certifiées GBP, ce qui traduit le souci permanent de toujours apporter la garantie de la qualité des aliments fabriqués par la mise en place de procédures de suivi de fabrication, traçabilité, contrôle des matières premières utilisées et des produits fabriqués.
+
+Formulation réalisée en partenariat avec la première firme service au plan national INZO° , ce qui nous permet de bénéficier des dernières avancées en matière de nutrition animale, notamment pour ce qui concerne le rationnement des animaux grâce à l'outil ALIPLAN à disposition de chaque technicien TEOL.</p>
+<h4>Productions végétales</h4>
+<img src="{{ asset('asset/image/ble.jpg') }}" alt="Photo Charolaise" class="float-left rounded img-circle m-2 " width="200" height="150">
+<p>Grâce à nos techniciens compétents, possédant de solides connaissances sans cesse réactualisées par l'intermédiaire entres autres d'AGRIDEV, structure de développement commune aux coopératives adhérentes à l'UCAPA, afin de toujours apporter un diagnostic fiable et pertinent pour améliorer les productions végétales de nos adhérents.
+
+Nous faisons partie du réseau d'observation du bulletin de santé végétale qui s'est substitué depuis peu aux avertissements agricoles.</p>
+<h4>Appro-équipement rural</h4>
+<img src="{{ asset('asset/image/gammvert.jpg') }}" alt="Photo Charolaise" class="float-left rounded img-circle m-2 " width="200" height="150">
+<p>En plus de notre offre traditionnelle : matériaux de construction, matériel d'eau, et d'autres équipements, nous avons complété depuis quelques mois notre offre équipement rural par une proposition en matériel d'équipement de bâtiments d'élevage type "tunnel ou chapelle" avec un partenaire à forte notoriété sur ce type de construction FILCLAIR.</p>
+<h4>Grand public</h4>
+<p>Chacun de nos sites dispose d'une gamme d'articles Grand Public, pour le jardin, le bricolage, spécialités régionales, habillement ..., sous l'enseigne GAMM VERT, Comptoir du Village ou magasin agricole et où nos clients bénéficient des conseils de nos techniciens.</p>
+<h4 id="prestation">Prestations</h4>
+<img src="{{ asset('asset/image/camion.jpg') }}" alt="Photo Charolaise" class="float-left rounded img-circle m-2 " width="200" height="150">
+<p>Actuellement, plutôt développé sur le secteur nord de notre zone, dans le but de réaliser pour nos adhérents des travaux qui doivent être effectués à des périodes ou la charge de travail est déjà très importante, avec des matériels spécifiques, propriété de la Coopérative, tels qu'apports d'engrais céréales, ou de désherbages précoces avec un quad.
+
+Rendu racine d'engrais pulvérulents à l'aide d'un automoteur piloté par un salarié de la Coopérative.
+
+Livraisons de paille tout au long de l'année.</p>
+<h4>Fuel</h4>
+<p>Distribution de fuel de chauffage ou carburant agricole depuis notre filiale EURL BOURBINCE DISTRIBUTION.</p>
+</div>
+
+<div class="presentation mx-5 p-3 border rounded border-warning ">
+<h2 class="text-center p-2" id ="presentation">Présentation de la coopérative</h2>
+<h4>Le capital</h4>
+<img src="{{ asset('asset/image/usine.jpg') }}" alt="Usine Charolles" class="float-left rounded img-circle m-2 " width="200" height="150">
+<p>Le capital social de la société est détenu par les agriculteurs.</p>
+<h4>Le Conseil d'Administration</h4>
+<p>La société est administrée par un Conseil d'administration composé de 21 agriculteurs. Les administrateurs sont élus par leurs pairs au cours de l'Assemblée Générale annuelle. Leur mission est de contrôler la bonne gestion de la coopérative et d'en fixer les orientations.
+Ils sont renouvelables par tiers chaque année.
+Ils élisent au sein du Conseil un bureau constitué de :
+Président :	Gilles Mazille
+Vice-présidents :	Yves Bonnot
+Patrice Ferrière
+Jean-François Labaune
+Jean Luc Dumout
+Gérard Laudet
+Trésorier :	Christophe Clément
+Secrétaire :	Henri Guillemot</p>
+<h4>La Direction</h4>
+<p>Le Conseil nomme un Directeur chargé du fonctionnement de la coopérative.
+Il est responsable du personnel et de la mise en oeuvre des décisions prises par le conseil d'administration.
+Directeur général : Philippe Saudin</p>
+</div>
+
+<div class="presentation mx-5 my-5 p-3 border rounded border-warning ">
+<h2 class="text-center" id ="implantation">Notre implantation</h2>
+<img src="{{ asset('asset/image/carte-implantation.jpg') }}" alt="Implantation Teol" class="d-block mx-auto rounded">
+
+</div>
+
+
+{% endblock %}

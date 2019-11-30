@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration du Site{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+    {% include 'backend/layout/_admin_header.html.twig' %}
+{% endblock %}
+
+{% block body %}
+<h1 class="text-center">Tableau de Bord - Administration du Site</h1>
+
+
+    <div class="container">
+
+        <div class="row justify-content-around text-center">
+
+            <a href="{{ path('backend_users_list') }}" class="col-10 col-sm-5 btn btn-warning mb-4">Liste des membres</a>
+            <a href="{{ path('backend_techs_list') }}" class="col-10 col-sm-5 btn btn-warning mb-4">Liste des techniciens</a>
+            <a href="{{ path('backend_shops_list') }}" class="col-10 col-sm-5 btn btn-warning mb-4">Liste des magasins</a>
+            <a href="{{ path('backend_allusers_list') }}" class="col-10 col-sm-5 btn btn-warning mb-4">Liste de tous les utilisateurs</a>
+           
+        </div>
+    </div>
+
+{% endblock %}
