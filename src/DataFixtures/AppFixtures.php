@@ -29,51 +29,55 @@ class AppFixtures extends Fixture
     {
         $faker = Faker\Factory::create('fr_FR');
 
+        
         // Création d'un admin
         $user = new User ();
         $user   ->setEmail('admin@admin.com')
                 ->setRoles(['ROLE_ADMIN']);
         $password = $this->encoder->encodePassword($user, 'admin');
         $user   ->setPassword($password)
-                //->setUsername('Teol')
                 ->setFirstname($faker->firstName())
                 ->setLastname($faker->lastName())
                 ->setSociety('Teol')
                 ->setPhone($faker->phoneNumber())
-                ->setEnable(true)
                 ->setAdress($faker->streetAddress)
                 ->setPostalCode($faker->numberBetween(1000, 9000) * 10)
                 ->setCity($faker->city);
+                //->setTechnicien(null);
                
       
         $manager->persist($user);
 
        
+        
+
         // Création de 5 tech
         for ($i = 0 ; $i <=4 ; $i++) {
-            $tech = new Technicien();
+            $tech = new User();
             
 
             $tech       ->setFirstname($faker->firstName())
                         ->setRoles(['ROLE_TECH'])
                         ->setEmail(sprintf('tech%d@teol.fr', $i))
                         ->setLastname($faker->lastName())
-                        ->setPhone($faker->phoneNumber())
-                        ->setEnable(true);
+                        ->setPhone($faker->phoneNumber());
+              
             
             $password = $this->encoder->encodePassword($user, 'tech');
             $tech       ->setPassword($password)
-                        //->setUsername('Teol')
-                        ->setSociety($faker->company())
+                        ->setSociety('Teol')
                         ->setAdress($faker->streetAddress)
                         ->setPostalCode($faker->numberBetween(1000, 9000) * 10)
                         ->setCity($faker->city);
                         $technicienList [] = $tech;
+                       
+                        
             
       
             $manager->persist($tech);
         }
 
+        
 
         //Création de 10 Users
         for($i = 0 ; $i <=9 ; $i++) {
@@ -82,17 +86,15 @@ class AppFixtures extends Fixture
                     ->setRoles(['ROLE_MEMBER']);
         $password = $this->encoder->encodePassword($user, 'member');
         $customer   ->setPassword($password)
-                    //->setUsername('')
                     ->setFirstname($faker->firstName())
                     ->setLastname($faker->lastName())
                     ->setSociety($faker->company())
                     ->setPhone($faker->phoneNumber())
-                    ->setEnable(true)
                     ->setAdress($faker->streetAddress)
                     ->setPostalCode($faker->numberBetween(1000, 9000) * 10)
                     ->setCity($faker->city);
                     $randomtechnicien = $technicienList[mt_rand(0, count($technicienList) - 1)];
-        //$customer   ->addTechnicien($randomtechnicien);
+        $customer   ->setTechnicien($randomtechnicien);
                     $userList [] = $customer;
                     $manager->persist($customer)
                     ;

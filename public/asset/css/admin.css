@@ -113,3 +113,16 @@ input[type="checkbox"].switch:checked:after {
     justify-content: space-around;
     margin-top: 0.5rem;
 }
+
+label {
+    display: block;
+    text-align: center;
+}
+
+input {
+    float: right;
+}
+
+.modal-body {
+    margin-left: 0;
+}

@@ -48,7 +48,7 @@
                 {{ form_start(form) }}
                     <div class="modal-body">
                        
-                        {{ form_row(form.name) }}
+                        {{ form_row(form.society) }}
                         {{ form_row(form.firstname) }}
                         {{ form_row(form.lastname) }}
                         {{ form_row(form.adress) }}
@@ -97,7 +97,7 @@
                 {% for user in users %}
                     <tr class="align-middle">
                         <td class="align-middle">{{ user.id }}</td>
-                        <td class="align-middle">{{ user.name }}</td>
+                        <td class="align-middle">{{ user.society }}</td>
                         <td class="align-middle">{{ user.firstname }}</td>
                         <td class="align-middle">{{ user.lastname }}</td>
                         <td class="align-middle">{{ user.adress }}</td>

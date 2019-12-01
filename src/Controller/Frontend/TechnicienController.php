@@ -2,18 +2,20 @@
 
 namespace App\Controller\Frontend;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
-class TechController extends AbstractController
+
+class TechnicienController extends AbstractController
 {
     /**
      * @Route("/tech/profil", name="tech_profil")
      * @throws UnauthorizedHttpException when user member is not logged in
      */
-    public function profil()
+    public function techprofil()
     {
         if (!$user = $this->getUser()) {
             throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
@@ -23,22 +25,7 @@ class TechController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/tech/client/index", name="tech_clients_list")
-     */
-    public function clientlist(UserRepository $userRepository) {
-        if (!$user = $this->getUser()) {
-
-            throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
-        }
-
-        $clients= $userRepository->getClientByTechnicien($this->getUser()->getLastname());
-        //dd($clients);
-
-        return $this->render('frontend/tech/clientindex.html.twig', [
-            'clients' => $clients
-        ]);
-    }
+   
 
     /**
      * @Route("/tech/client/{id}", name="tech_client_view", requirements={"id"="\d+"})
@@ -46,11 +33,26 @@ class TechController extends AbstractController
     public function view($id, UserRepository $ur) {
 
         $user = $ur->find($id);
-        return $this->render('frontend/tech/clientprofil.html.twig', [
+        return $this->render('frontend/tech/tech_client_view.html.twig', [
             'user' => $user,
             
         ]);
     }
 
+     /**
+     * @Route("/tech/client/index", name="tech_clients_index")
+     */
+    public function clientlist(UserRepository $userRepository) {
+        if (!$user = $this->getUser()) {
 
+            throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
+        }
+        dump($user);
+        $clients= $userRepository->findAllClientByTechnicien($this->getUser()->getEmail());
+        dump($clients);
+
+        return $this->render('frontend/tech/tech_clients_index.html.twig', [
+            'clients' => $clients
+        ]);
+    }
 }

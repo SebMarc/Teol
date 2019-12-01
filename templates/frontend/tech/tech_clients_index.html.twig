@@ -27,7 +27,7 @@
                 <tr class="trhead">
                     <th scope="col">Id</th>
                     <th scope="col">Société</th>
-                      <th scope="col">Prenom</th>
+                    <th scope="col">Prenom</th>
                     <th scope="col">Nom</th>
                     <th scope="col"class="w-20">Adresse</th>
                     <th scope="col">Code Postal</th>
@@ -44,7 +44,7 @@
                 {% for user in clients %}
                     <tr class="align-middle">
                         <td class="align-middle">{{ user.id }}</td>
-                        <td class="align-middle">{{ user.name }}</td>
+                        <td class="align-middle">{{ user.society }}</td>
                         <td class="align-middle">{{ user.firstname }}</td>
                         <td class="align-middle">{{ user.lastname }}</td>
                         <td class="align-middle">{{ user.adress }}</td>

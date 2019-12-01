@@ -64,7 +64,7 @@ class UserUpdateProfilType extends AbstractType
             ->add('city', TextType::class, [
                 'label' => 'Ville'
             ])
-            ->add('name', TextType::class, [
+            ->add('society', TextType::class, [
                 'label' =>'Société'
             ])
             ->add('enable', HiddenType::class)

@@ -50,15 +50,15 @@ class UserUpdateProfilType extends AbstractType
                     'placeholder' => 'Laisser vide si inchangé',
                 ],
             ])
-            
+            /*
             ->add('technicien', EntityType::class, [
                 'class'         => Technicien::class,
                 'multiple'      => false,
                 'choice_label'  =>'lastname',
                 'query_builder' => function(AppTechnicienRepository $repository)  {
-                  return $repository->getAllTechnicienForm();
+                  return $repository->findAllTechnicien();
                 }
-            ])
+            ])*/
             
 
             ->add('roles', ChoiceType::class, [
@@ -90,7 +90,7 @@ class UserUpdateProfilType extends AbstractType
             ->add('city', TextType::class, [
                 'label' => 'Ville'
             ])
-            ->add('name', TextType::class, [
+            ->add('society', TextType::class, [
                 'label' =>'Société'
             ])
             ->add('enable', CheckboxType::class, [

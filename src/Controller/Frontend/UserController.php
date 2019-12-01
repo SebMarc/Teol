@@ -33,9 +33,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/update",
-     *     name="user_profil_update",
-     *     methods={"GET", "POST"})
+     * @Route("/user/update", name="user_profil_update", methods={"GET", "POST"})
      *
      * @param Request $request
      *
@@ -68,4 +66,6 @@ class UserController extends AbstractController
             'update_form' => $updateForm->createView()
         ]);
     }
+
+  
 }

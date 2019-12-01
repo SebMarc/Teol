@@ -36,36 +36,40 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function getAllTechnicien() {
-        return $this->createQueryBuilder('u')
+    public function findAllClientByTechnicien($t)
+    {
+        $qb = $this->createQueryBuilder('u')
+        ->where('u.technicien = :tech')
+        ->setParameter('tech', $t)
+        ->getQuery()
+        ->getResult();
+        return $qb;
+    }
+
+    public function findAllMemberOnly() {
+        $qb = $this->createQueryBuilder('u')
         ->where('u.roles LIKE :role')
-        ->setParameter('role','%ROLE_TECH%')
+        ->setParameter('role','%"'.'ROLE_MEMBER'.'"%')
         ->getQuery()
         ->getResult();
-    }
- 
-
-    public function getClientByTechnicien($id) {
-        return $this->createQueryBuilder('u')
-        ->where('u.technicien LIKE :tech')
-        ->setParameter('tech', $id)
-        ->getQuery()
-        ->getResult();
+        return $qb;
+        
     }
 
-    public function getAllMemberOnly() {
-        return $this->createQueryBuilder('u')
-        ->where('u.roles LIKE :role')
-        ->setParameter('role','%ROLE_MEMBER%')
-        ->getQuery()
-        ->getResult();
-    }
-
-    public function getAllTechnicienForm() {
+    public function findAllTechnicienForm() {
         return $this->createQueryBuilder('u')
         ->where('u.roles LIKE :role')
         ->setParameter('role','%ROLE_TECH%');
     }
+
+    public function findAllTechnicien() {
+        $qb =$this->createQueryBuilder('u')
+         ->where('u.roles LIKE :role')
+         ->setParameter('role','%ROLE_TECH%')
+         ->getQuery()
+         ->getResult();
+         return $qb;
+     }
 
     // /**
     //  * @return User[] Returns an array of User objects

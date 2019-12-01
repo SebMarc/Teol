@@ -11,7 +11,7 @@
 	<div class="d-flex">
 		<div class="user-form">
 			
-			{% if is_granted('ROLE_MEMBER') %}
+			{% if is_granted('ROLE_MEMBER') %} 
 				<h1 class="text-white">Mon Profil</h1>
 				{# Détails du profil du User loggué #}
 				
@@ -35,7 +35,7 @@
 			<a type="button" class="btn btn-warning btn-lg btn-block">Mes dernières commandes</a>
 			<a type="button" class="btn btn-warning btn-lg btn-block">Mes produits</a>
 			<a type="button" class="btn btn-warning btn-lg btn-block">Mes tarifs</a>
-			<a type="button" class="btn btn-warning btn-lg btn-block">Mon conseiller</a>
+			
 			{# Flash Message{#}
 			{% for label, messages in app.flashes(['success', 'warning', 'danger', 'info']) %}
 				{% for message in messages %}
