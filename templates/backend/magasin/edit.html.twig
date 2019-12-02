@@ -16,7 +16,7 @@
 <h1 class="text-center">Administration des magasins</h1>
 <div class="user-form">
 
-    <h3>Saisissez un magasin</h3>
+    <h3 class="text-white text-center">Saisissez un magasin</h3>
 
     {{ form_start(form) }}
 
@@ -32,7 +32,7 @@
 
             <div class="form-group row">
                 <label for="add_shop_enable" class="col-form-label col-sm-2">Activer</label>
-                <div class="col-sm-10" data-children-count="1">
+                <div class="col-sm-10 py-2" data-children-count="1">
                     {{ form_row(form.enable, {'attr': {'class': 'switch form-control'}}) }}
                 </div>
             </div>

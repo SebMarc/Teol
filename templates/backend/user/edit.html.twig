@@ -16,7 +16,7 @@
 <h1 class="text-center">Administration des adhérents</h1>
 <div class="user-form">
 
-    <h3 class="text-white">Modifier un adhérent</h3>
+    <h3 class="text-white text-center">Modifier un adhérent</h3>
 
     {{ form_start(form) }}
 
@@ -30,8 +30,9 @@
             {{ form_row(form.phone) }}
             {{ form_row(form.email) }}
             {{ form_row(form.password) }}
+           {#} {{ form_row(form.technicien) }}{#}
             {{ form_row(form.roles) }}
-            {#{{ form_row(form.technicien) }}{#}
+            
             
 
             

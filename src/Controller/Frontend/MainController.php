@@ -31,7 +31,7 @@ class MainController extends AbstractController
      * @param Request $request
      *
      */
- /*   public function contact(Request $request, ContactNotification $notification)
+    public function contact(Request $request, ContactNotification $notification)
     {
         $contact = new Contact();
         $form = $this->createForm(ContactFormType::class, $contact);
@@ -54,7 +54,7 @@ class MainController extends AbstractController
         return $this->render('frontend/main/contact.html.twig', [
             'contactForm' => $form->createView(),
         ]);
-    }*/
+    }
 
     
 }

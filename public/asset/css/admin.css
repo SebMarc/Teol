@@ -121,6 +121,17 @@ label {
 
 input {
     float: right;
+    width: 330px;
+}
+
+select {
+    float: right;
+}
+
+textarea {
+    float: right;
+    width: 250px;
+    height: 100px;
 }
 
 .modal-body {

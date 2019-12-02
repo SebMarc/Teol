@@ -32,7 +32,7 @@
                 {# Affichage si Role Member #}
                 {% if is_granted('ROLE_MEMBER') %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">
                     Adhérent
                     </a>
                         <div class="dropdown-menu">
@@ -111,7 +111,7 @@
                         Accueil <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <a href="#" class="nav-link d-flex align-items-center text-white">
+                <a href="{{ path('contact') }}" class="nav-link d-flex align-items-center text-white">
                         <i class="fas fa-envelope mr-2 " aria-hidden="true" ></i>
                         Contact <span class="sr-only">(current)</span>
                     </a>

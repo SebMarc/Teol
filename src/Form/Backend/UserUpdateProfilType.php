@@ -2,9 +2,8 @@
 
 namespace App\Form\Backend;
 
-use App\Entity\Technicien;
+
 use App\Entity\User;
-use App\Repository\TechnicienRepository as AppTechnicienRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -50,15 +49,14 @@ class UserUpdateProfilType extends AbstractType
                     'placeholder' => 'Laisser vide si inchangé',
                 ],
             ])
-            /*
+            
             ->add('technicien', EntityType::class, [
-                'class'         => Technicien::class,
+                'class'         => User::class,
                 'multiple'      => false,
-                'choice_label'  =>'lastname',
-                'query_builder' => function(AppTechnicienRepository $repository)  {
-                  return $repository->findAllTechnicien();
+                'query_builder' => function(UserRepository $repository)  {
+                  return $repository->findAllTechnicienForm();
                 }
-            ])*/
+            ])
             
 
             ->add('roles', ChoiceType::class, [

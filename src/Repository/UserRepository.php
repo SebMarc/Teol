@@ -36,7 +36,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function findAllClientByTechnicien($t)
+    public function findAllClientByTechnicien($t) //Ok
     {
         $qb = $this->createQueryBuilder('u')
         ->where('u.technicien = :tech')
@@ -60,6 +60,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
         ->where('u.roles LIKE :role')
         ->setParameter('role','%ROLE_TECH%');
+        
     }
 
     public function findAllTechnicien() {
