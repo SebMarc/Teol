@@ -45,15 +45,18 @@
 				{% endfor %}
 			{% endfor %} 
 		</div>
-		<div class="user-form">
+		<div class="user-form text-center">
 			
 			
 				<h1 class="text-white text-center">Mon Conseiller</h1>
-				
-				<p>Nom : {{''}}</p>
-				<p>Prenom : {{''}}</p>
-				<p>Email : {{''}}</p>
-				<p>Telephone : {{''}}</p>
+				{% for technicien in technicien %}
+					
+				<p>Nom : {{technicien.lastname}}</p>
+				<p>Prenom : {{technicien.firstname}}</p>
+				<p>Email : {{technicien.email}}</p>
+				<p>Telephone : {{technicien.phone}}</p>
+
+				{% endfor %}
 			
 	
 		</div>

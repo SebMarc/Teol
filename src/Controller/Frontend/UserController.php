@@ -22,12 +22,12 @@ class UserController extends AbstractController
         if (!$user = $this->getUser()) {
             throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
         }
-        //$technicien = $user->getTechnicien();
-        //dd($technicien);
+        $technicien = $ur->findTechnicienByClient($user->getTechnicien());
+        dump($technicien);
 
         return $this->render('frontend/user/profil.html.twig', [
             'user' => $user,
-            //'technicien' => $technicien
+            'technicien' => $technicien
         
         ]);
     }

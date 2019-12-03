@@ -87,10 +87,11 @@ class User implements UserInterface
     
 
     
-
+    /*public function __toString()
+    {
+        return $this->lastname . " " . $this->firstname;
+    }*/
     
-
-   
 
     public function __toString()
     {

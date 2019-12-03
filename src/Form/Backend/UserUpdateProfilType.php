@@ -4,6 +4,7 @@ namespace App\Form\Backend;
 
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -53,6 +54,7 @@ class UserUpdateProfilType extends AbstractType
             ->add('technicien', EntityType::class, [
                 'class'         => User::class,
                 'multiple'      => false,
+                'choice_label'  => 'lastname',
                 'query_builder' => function(UserRepository $repository)  {
                   return $repository->findAllTechnicienForm();
                 }
