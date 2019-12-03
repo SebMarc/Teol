@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 class UserController extends AbstractController
 {
@@ -16,12 +17,13 @@ class UserController extends AbstractController
     /**
      * @Route("backend/user/index", name="backend_users_list")
      */
-    public function showlist(UserRepository $userRepository, Request $request)
+    public function showlist(UserRepository $userRepository, Request $request, PaginatorInterface $paginator)
     {
-        $users = $userRepository->findAllMemberOnly();
-        dump($users);
+        $users = $paginator->paginate($userRepository->findAllMemberOnly(),
+        $request->query->getInt('page', 1), 5
+    );
+        //dump($users);
        
-
         $user = new User();
         $form = $this->createForm(UserUpdateProfilType::class, $user);
         $form->handleRequest($request);
@@ -40,7 +42,6 @@ class UserController extends AbstractController
         }
         return $this->render('backend/user/index.html.twig', [
             'users' => $users,
-            //'clients' => $clients,
             'form' => $form->createView()
         ]);
 
@@ -118,9 +119,11 @@ class UserController extends AbstractController
     /**
      * @Route("backend/allusers/index", name="backend_allusers_list")
      */
-    public function showalllist(UserRepository $userRepository, Request $request)
+    public function showalllist(UserRepository $userRepository, Request $request, PaginatorInterface $paginator)
     {
-        $users = $userRepository->findAll();
+        $users = $paginator->paginate($userRepository->findAll(),
+        $request->query->getInt('page', 1), 6
+    );
        
         //$clients= $userRepository->findByTechnicien($this->getUser()->getEmail());
 

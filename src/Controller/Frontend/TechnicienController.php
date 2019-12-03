@@ -5,8 +5,10 @@ namespace App\Controller\Frontend;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 class TechnicienController extends AbstractController
@@ -42,13 +44,15 @@ class TechnicienController extends AbstractController
      /**
      * @Route("/tech/client/index", name="tech_clients_index")
      */
-    public function clientlist(UserRepository $userRepository) {
+    public function clientlist(UserRepository $userRepository, Request $request, PaginatorInterface $paginator) {
         if (!$user = $this->getUser()) {
 
             throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
         }
         dump($user);
-        $clients= $userRepository->findAllClientByTechnicien($this->getUser()->getEmail());
+        $clients= $paginator->paginate($userRepository->findAllClientByTechnicien($this->getUser()->getEmail()),
+        $request->query->getInt('page', 1), 5
+    );
         dump($clients);
 
         return $this->render('frontend/tech/tech_clients_index.html.twig', [

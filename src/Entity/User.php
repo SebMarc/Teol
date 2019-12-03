@@ -281,7 +281,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTechnicien(): ?string
+    public function getTechnicien()
     {
         return $this->technicien;
     }

@@ -2,6 +2,11 @@
 
 {% block title %}Connectez vous !{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
 {% block body %}
 
 <form method="post" class="w-25  border p-4 text-center mx-auto" >
@@ -16,10 +21,14 @@
     {% endif %}
 
     <h1 class="h3 mb-3 font-weight-normal text-center">Connexion à mon compte</h1>
-    <label for="inputEmail" >Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-3" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+    <div>
+    <label for="inputEmail" class="loginemail" >Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-3 logininput" required autofocus>
+    </div>
+    <div>
+    <label for="inputPassword" class="loginmdp" >Mot de passe</label>
+    <input type="password" name="password" id="inputPassword" class="form-control logininput" required>
+    </div>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
@@ -36,7 +45,7 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-warning mt-3" type="submit">
+    <button class=" loginsubmit btn btn-lg btn-warning mt-3" type="submit">
         Accéder à mon compte
     </button>
 </form>

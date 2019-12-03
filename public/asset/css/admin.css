@@ -1,16 +1,5 @@
 /* --- HEADER --- */
 
-body {
-    margin-bottom: 0.5rem;
-}
-
-footer {
-    position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
 .admin__header {
     border-bottom: 1px solid black;
 }
@@ -106,34 +95,4 @@ input[type="checkbox"].switch:after {
 
 input[type="checkbox"].switch:checked:after {
     left: calc(100% - 0.8em);
-}
-
-#user_update_profil_roles {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 0.5rem;
-}
-
-label {
-    display: block;
-    text-align: center;
-}
-
-input {
-    float: right;
-    width: 330px;
-}
-
-select {
-    float: right;
-}
-
-textarea {
-    float: right;
-    width: 250px;
-    height: 100px;
-}
-
-.modal-body {
-    margin-left: 0;
 }

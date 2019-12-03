@@ -9,15 +9,18 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 class TechnicienController extends AbstractController
 {
     /**
      * @Route("backend/tech/index", name="backend_techs_list")
      */
-    public function showtechlist(UserRepository $techRepository, Request $request)
+    public function showtechlist(UserRepository $techRepository, Request $request, PaginatorInterface $paginator)
     {
-        $users = $techRepository->findAllTechnicien();
+        $users = $paginator->paginate($techRepository->findAllTechnicien(),
+        $request->query->getInt('page', 1), 5
+        );
 
         $user = new User();
         $form = $this->createForm(UserUpdateProfilType::class, $user);

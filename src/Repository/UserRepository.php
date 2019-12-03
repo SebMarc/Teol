@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,25 +37,33 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function findAllClientByTechnicien($t) //Ok
+    /**
+     * @return Query
+     */
+    public function findAllClientByTechnicien($t) :Query //Ok
     {
-        $qb = $this->createQueryBuilder('u')
+        return $this->createQueryBuilder('u')
         ->where('u.technicien = :tech')
         ->setParameter('tech', $t)
-        ->getQuery()
-        ->getResult();
-        return $qb;
-    }
-
-    public function findAllMemberOnly() {   //ok
-        $qb = $this->createQueryBuilder('u')
-        ->where('u.roles LIKE :role')
-        ->setParameter('role','%"'.'ROLE_MEMBER'.'"%')
-        ->getQuery()
-        ->getResult();
-        return $qb;
+        ->getQuery();
+      
         
     }
+
+    
+    /**
+     * @return Query
+     */
+    public function findAllMemberOnly() :Query {   
+        return $this->createQueryBuilder('u')
+        ->where('u.roles LIKE :role')
+        ->setParameter('role','%"'.'ROLE_MEMBER'.'"%')
+        ->getQuery();
+        
+        
+        
+    }
+
 
     public function findAllTechnicienForm() { //ok
         return $this->createQueryBuilder('u')
@@ -63,13 +72,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         
     }
 
-    public function findAllTechnicien() {       //ok
-        $qb =$this->createQueryBuilder('u')
+
+    /**
+     * @return Query
+     */
+    public function findAllTechnicien() :Query {       //ok
+        return $this->createQueryBuilder('u')
         ->where('u.roles LIKE :role')
         ->setParameter('role','%ROLE_TECH%')
-        ->getQuery()
-        ->getResult();
-        return $qb;
+        ->getQuery();
+        
+       
      }
 
      public function findTechnicienByClient($email) {

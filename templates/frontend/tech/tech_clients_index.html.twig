@@ -56,7 +56,7 @@
                         
                         
                         <td class="table__data--edit align-middle">
-                            <a href="{{ path('tech_client_view', {'id' : user.id}) }}"><i class="fa fa-pencil-square-o edit__icon"></i></a>
+                            <a href="{{ path('tech_client_view', {'id' : user.id}) }}"><i class="fa fa-eye view__icon"></i></a>
                         </td>
                        
                     </tr>
@@ -67,6 +67,8 @@
                 {% endfor %}
             </tbody>
         </table>
-        
+        <div class="d-flex justify-content-center">
+            {{ knp_pagination_render(clients) }}
+        </div>
     </div>
 {% endblock %}

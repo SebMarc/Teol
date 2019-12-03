@@ -74,9 +74,9 @@
         </div>
     </div>
 
-        <table class="table table-striped table-responsive text-center tableau" >
+        <table class="table table-striped  text-center tableau justify-content-center" >
             <thead>
-                <tr class="trhead">
+                <tr class="trhead justify-content-center">
                     <th scope="col">Id</th>
                     <th scope="col">Société</th>
                     <th scope="col"class="w-20">Adresse</th>
@@ -124,6 +124,8 @@
                 {% endfor %}
             </tbody>
         </table>
-        
+        <div class="d-flex justify-content-center">
+            {{ knp_pagination_render(users) }}
+        </div>
     </div>
 {% endblock %}

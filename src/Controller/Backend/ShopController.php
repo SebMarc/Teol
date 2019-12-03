@@ -8,6 +8,7 @@ use App\Repository\MagasinRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 class ShopController extends AbstractController
 {
@@ -48,9 +49,11 @@ class ShopController extends AbstractController
     /**
      * @Route("backend/shop/index", name="backend_shops_list")
      */
-    public function showlist(MagasinRepository $magasinRepository, Request $request)
+    public function showlist(MagasinRepository $magasinRepository, Request $request, PaginatorInterface $paginator)
     {
-        $shops = $magasinRepository->findAll();
+        $shops = $paginator->paginate($magasinRepository->findAll(),
+        $request->query->getInt('page', 1), 5
+    );
 
         $shop = new Magasin();
         $form = $this->createForm(ShopFormType::class, $shop);

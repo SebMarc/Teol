@@ -4,13 +4,11 @@ body {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    margin-bottom: 0.5rem;
 }
 
 footer {
     position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
 }
 
 .nav-bar {
@@ -21,7 +19,7 @@ footer {
 }
 
 .headerband {
-    background-image: linear-gradient(#DD9D18, #AF692B);
+    margin-bottom: 0;
 }
 
 .user-form {
@@ -78,4 +76,44 @@ li {
 
 .btn {
     margin-top: 0.5rem;
+}
+
+#user_update_profil_roles {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0.5rem;
+}
+
+label {
+    display: block;
+    text-align: center;
+}
+
+input {
+    float: right;
+    width: 330px;
+}
+
+select {
+    float: right;
+}
+
+textarea {
+    float: right;
+    width: 330px;
+    height: 50px;
+}
+
+.modal-body {
+    margin-left: 0;
+}
+
+tr,
+{
+    height: 50px;
+}
+
+td {
+    height: 50px;
+    padding: 6px;
 }
