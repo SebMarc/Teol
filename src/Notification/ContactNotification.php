@@ -3,6 +3,8 @@
 namespace App\Notification;
 
 use App\Entity\Contact;
+use App\Entity\TechContact;
+use App\Entity\User;
 use Twig\Environment;
 
 class ContactNotification {
@@ -31,8 +33,30 @@ private $renderer;
         ->setFrom($contact->getEmail())
         ->setTo('seb.marcaire@gmail.com')
         ->setReplyTo($contact->getEmail())
-        ->setBody($this->renderer->render('frontend/email/contact.html.twig', [
+        ->setBody($this->renderer->render('frontend/email/contactsend.html.twig', [
             'contact' =>$contact
+        ]), 'text/html');
+        $this->mailer->send($message);
+    }
+
+    public function techcontact(User $user) {
+        $message = (new \Swift_Message)
+        ->setFrom($user->getEmail())
+        ->setTo('seb.marcaire@gmail.com')
+        ->setReplyTo($user->getEmail())
+        ->setBody($this->renderer->render('frontend/email/techcontactsend.html.twig', [
+            'user' => $user
+        ]), 'text/html');
+        $this->mailer->send($message);
+    }
+
+    public function membercontact(User $user) {
+        $message = (new \Swift_Message)
+        ->setFrom($user->getEmail())
+        ->setTo('seb.marcaire@gmail.com')
+        ->setReplyTo($user->getEmail())
+        ->setBody($this->renderer->render('frontend/email/membercontactsend.html.twig', [
+            'user' => $user
         ]), 'text/html');
         $this->mailer->send($message);
     }

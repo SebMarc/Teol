@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact Technicien{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="user-form">
+
+    <h3 class="text-white  text-center">Message à mon Technicien!</h3>
+        
+        {{ form_start(techcontactForm) }}
+        <div class="modal-body">
+        <div> {{ form_row(techcontactForm.society) }} </div> 
+        <div> {{ form_row(techcontactForm.email) }} </div>
+        <div> {{ form_row(techcontactForm.phone) }} </div>
+        <div> {{ form_row(techcontactForm.message) }} </div>
+    
+        <button class="btn btn-warning text-center">Envoyer</button>
+        </div>
+        {{ form_end(techcontactForm) }}
+        
+</div>
+
+{% endblock %}

@@ -78,6 +78,8 @@ class User implements UserInterface
      */
     private $technicien;
 
+    private $message;
+
     
 
 
@@ -292,13 +294,25 @@ class User implements UserInterface
 
         return $this;
     }
+  
 
+    /**
+     * Get the value of message
+     */ 
+    public function getMessage()
+    {
+        return $this->message;
+    }
 
+    /**
+     * Set the value of message
+     *
+     * @return  self
+     */ 
+    public function setMessage($message)
+    {
+        $this->message = $message;
 
-    
-
-
-
-
-    
+        return $this;
+    }
 }

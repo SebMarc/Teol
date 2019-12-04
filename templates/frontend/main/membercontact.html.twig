@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="user-form">
+
+    <h3 class="text-white  text-center">Contact Adhérent</h3>
+        
+        {{ form_start(membercontactForm) }}
+        <div class="modal-body">
+        <div> {{ form_row(membercontactForm.society) }} </div> 
+        <div> {{ form_row(membercontactForm.email) }} </div>
+        <div> {{ form_row(membercontactForm.phone) }} </div>
+        <div> {{ form_row(membercontactForm.message) }} </div>
+    
+        <button class="btn btn-warning text-center">Envoyer</button>
+        </div>
+        {{ form_end(membercontactForm) }}
+        
+</div>
+
+{% endblock %}

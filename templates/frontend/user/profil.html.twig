@@ -53,7 +53,7 @@
 					
 				<p>Nom : {{technicien.lastname}}</p>
 				<p>Prenom : {{technicien.firstname}}</p>
-				<p>Email : {{technicien.email}}</p>
+				<a href="{{path('techcontact') }}"><p>Email :  {{technicien.email}}</p></a>
 				<p>Telephone : {{technicien.phone}}</p>
 
 				{% endfor %}

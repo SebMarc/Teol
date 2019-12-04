@@ -36,6 +36,7 @@
                     <th scope="col">Telephone</th>
                     <th scope="col">Actif</th>
                     <th scope="col">Voir</th>
+                    
                  
                 
                 </tr>
@@ -50,7 +51,7 @@
                         <td class="align-middle">{{ user.adress }}</td>
                         <td class="align-middle">{{ user.postalCode }}</td>
                         <td class="align-middle">{{ user.city }}</td>
-                        <td class="align-middle">{{ user.email }}</td>
+                        <td class="align-middle"><a href="{{ path('membercontact')}}">{{ user.email }}</a></td>
                         <td class="align-middle">{{ user.phone }}</td>
                         <td class="align-middle">{{ user.enable ? "Oui" : "Non" }}</td>
                         
