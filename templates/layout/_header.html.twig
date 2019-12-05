@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="utf-8">
-      <title>Navbar Example</title>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-   </head>
-
-   <body>
+<header>
     <nav class=" headermenu navbar navbar-expand-sm  navbar-dark d-flex justify-content-between">
         <div class="d-flex">
          <!-- Brand -->
@@ -55,20 +47,16 @@
                 {% endif %}
 
                 {# Magasins #}
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown"> 
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">
                     Nos magasins
                     </a>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Charolles</a>
-                        <a class="dropdown-item" href="#">Saint Yvan</a>
-                        <a class="dropdown-item" href="#">Toulon-sur-Arroux</a>
-                        <a class="dropdown-item" href="#">Blanzy</a>
-                        <a class="dropdown-item" href="#">Dompierre les Ormes</a>
-                        <a class="dropdown-item" href="#">Palinges</a>
-                        <a class="dropdown-item" href="#">Issy l'Evêque</a>
-                        <a class="dropdown-item" href="#">Luzy</a>
-                        <a class="dropdown-item" href="#">Molinet</a>
+                       {% for shop in teolshops %}
+                            
+                            <a class="dropdown-item" href="{{ path('shop_view', {'id' : shop.id, 'type' : 'magasin'}) }}">{{ shop.name }}</a>
+                        
+                        {% endfor %}
                         </div>
                 </li>
 
@@ -102,7 +90,7 @@
                 <li class="nav-item">
                 <a class="nav-link text-white" href="#">Infos pratiques</a>
                 </li>
-    </div>
+        </div>
                 {#Offre du Menu navigation#}
                 <div class ="d-flex ">
                 <li class="nav-item ">
@@ -161,4 +149,5 @@
             
  
         </nav>
-    </body>
+   
+</header>

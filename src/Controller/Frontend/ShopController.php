@@ -2,18 +2,26 @@
 
 namespace App\Controller\Frontend;
 
+use App\Entity\Magasin;
+use App\Repository\MagasinRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ShopController extends AbstractController
 {
     /**
-     * @Route("/shop", name="shop")
+     * @Route("/shopview/{id<\d+>}", name="shop_view")
      */
-    public function index()
+    public function shopview($id, Magasin $mag, MagasinRepository $mr)
     {
-        return $this->render('shop/index.html.twig', [
-            'controller_name' => 'ShopController',
+        $mag = $mr->find($id);
+        //dd($mag);
+      
+
+        return $this->render('frontend/magasin/shop_view.html.twig', [
+            'shop' => $mag
         ]);
     }
+
+    
 }

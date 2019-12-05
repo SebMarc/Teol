@@ -9,6 +9,7 @@ use App\Notification\ContactNotification;
 use App\Form\ContactFormType;
 use App\Entity\Contact;
 use App\Form\TechContactFormType;
+use App\Repository\MagasinRepository;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class MainController extends AbstractController
@@ -20,8 +21,10 @@ class MainController extends AbstractController
      */
     public function index()
     {
+        
         return $this->render('frontend/main/homepage.html.twig', [
             'controller_name' => 'MainController',
+           
         ]);
     }
 

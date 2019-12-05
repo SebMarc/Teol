@@ -61,6 +61,16 @@ class Magasin
      */
     private $close;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $web;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->enable     = true;
@@ -177,6 +187,30 @@ class Magasin
     public function setClose(string $close): self
     {
         $this->close = $close;
+
+        return $this;
+    }
+
+    public function getWeb(): ?string
+    {
+        return $this->web;
+    }
+
+    public function setWeb(?string $web): self
+    {
+        $this->web = $web;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
