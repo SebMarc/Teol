@@ -52,7 +52,7 @@ class ShopController extends AbstractController
     public function showlist(MagasinRepository $magasinRepository, Request $request, PaginatorInterface $paginator)
     {
         $shops = $paginator->paginate($magasinRepository->findAll(),
-        $request->query->getInt('page', 1), 5
+        $request->query->getInt('page', 1), 10
     );
 
         $shop = new Magasin();

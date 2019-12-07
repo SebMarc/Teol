@@ -1,21 +1,109 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Magasin{% endblock %}
+{% block title %}Magasin {{shop.name}}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
 {% endblock %}
 
 {% block body %}
 
-<div class="container">
-  <div class="row">
-    <div class="owl-carousel owl-theme">
-      <div class="item"><h4>1</h4></div>
-      <div class="item"><h4>2</h4></div>
-      <div class="item"><h4>3</h4></div>
-    </div>
+<div class="container-fluid d-flex">
+
+  <div class=" mb-5 mt-5  d-flex col-md-6">
+    {% if shop.image %}
+    <div class="item col-md-6 mr-5 "><img src="{{ asset('asset/image/magasin/' ~ shop.image) }}" alt="" class="rounded" ></div>
+    {% else %}
+    <div class="item col-md-6 mr-5"><img src="{{ asset('asset/image/logoteol.png') }}" alt="" class="rounded" ></div>
+    {% endif %}
+      <div class="col-md-6 ml-5  pl-5">
+          <h1 class="font-weight-light">{{shop.name}}</h1>
+          <p>Adresse : {{shop.adress}}</p>
+          <p>Code Postal: {{shop.postalCode}}</p>
+          <p>Ville : {{shop.city}}</p>
+          <p>Telephone : {{shop.phone}}</p>
+          <p>Fax: {{shop.fax}}</p>
+          <p>Responsable : {{shop.manager}}</p>
+          <a class="btn btn-warning" href="{{shop.web}}">Site officiel</a>
+          <a class="btn btn-success" href="https://www.gammvert.fr/2-5061-promotions">Promo</a>
+      </div>
+  </div>
+  <div class="col-md-4 ml-5 mt-5 text-center">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Jour</th>
+          <th scope="col">Matin</th>
+          <th scope="col">Après Midi</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Lundi</th>
+          <td>09:00 - 12:00</td>
+          <td>14:00 - 18:30</td>
+        </tr>
+        <tr>
+          <th scope="row">Mardi</th>
+          <td>09:00 - 12:00</td>
+          <td>14:00 - 18:30</td>
+        </tr>
+        <tr>
+          <th scope="row">Mercredi</th>
+          <td>09:00 - 12:00</td>
+          <td>14:00 - 18:30</td>
+        </tr>
+        <tr>
+          <th scope="row">Jeudi</th>
+          <td>09:00 - 12:00</td>
+          <td>14:00 - 18:30</td>
+        </tr>
+        <tr>
+          <th scope="row">Vendredi</th>
+          <td>09:00 - 12:00</td>
+          <td>14:00 - 18:30</td>
+        </tr>
+        <tr>
+          <th scope="row">Samedi</th>
+          <td>09:00 - 12:00</td>
+          <td>14:00 - 18:30</td>
+        </tr>
+        <tr>
+          <th scope="row">Dimanche</th>
+          <td>Fermé</td>
+          <td>Fermé</td>
+        </tr>
+      
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class=" tableau container col-md-12 justify-content-center mb-5">
+  
+    <div class="owl-carousel col-md-9 mx-auto">
+     
+     {% for shop in teolshops %}
+     {% if shop.image %}
+     
+     {% dump(teolshops)%}
+       
+     
+      <div class="item">
+        <a href="{{ path('shop_view', {'id': shop.id} ) }}">
+          <img src="{{ asset('asset/image/magasin/' ~ shop.image ) }}" alt="" class="img-rounded">
+          <span class="custom-overlay">
+          <span class="content-text">
+          <h5 class="text-white text-center mt-3">{{shop.name}}</h5>
+          </span>
+          </span>
+      </a>
+      </div>
+      {% endif %}
+      {% endfor %}
   </div>
 </div>
   
@@ -23,4 +111,9 @@
 
 
 
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="{{ asset('asset/js/app.js') }}"></script>
 {% endblock %}

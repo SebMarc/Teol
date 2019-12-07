@@ -2,6 +2,11 @@
 
 {% block title %}Bienvenue chez Teol !{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
 {% block body %}
 
 <div>
@@ -57,18 +62,51 @@ Livraisons de paille tout au long de l'année.</p>
 <p>La société est administrée par un Conseil d'administration composé de 21 agriculteurs. Les administrateurs sont élus par leurs pairs au cours de l'Assemblée Générale annuelle. Leur mission est de contrôler la bonne gestion de la coopérative et d'en fixer les orientations.
 Ils sont renouvelables par tiers chaque année.
 Ils élisent au sein du Conseil un bureau constitué de :
-Président :	Gilles Mazille
-Vice-présidents :	Yves Bonnot
-Patrice Ferrière
-Jean-François Labaune
-Jean Luc Dumout
-Gérard Laudet
-Trésorier :	Christophe Clément
-Secrétaire :	Henri Guillemot</p>
+<div class="container col-md-7 ml-4 text-center mx-auto">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Fonction</th>
+      <th scope="col">Nom</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Président</th>
+      <td>Gilles Mazille</td>
+   
+    </tr>
+    <tr>
+      <th scope="row">Vice-présidents</th>
+      <td>Yves Bonnot Patrice Ferrière Jean-François Labaune Jean Luc Dumout Gérard Laudet</td>
+    
+    </tr>
+    <tr>
+      <th scope="row">Trésorier</th>
+      <td>Christophe Clément</td>
+    
+    </tr>
+    <tr>
+      <th scope="row">Secrétaire</th>
+      <td>Henri Guillemot</td>
+      
+    </tr>
+    <tr>
+      <th scope="row">Directeur Général</th>
+      <td>Philippe Saudin</td>
+      
+    </tr>
+    
+  
+   
+  </tbody>
+</table>
+</div>
+
 <h4>La Direction</h4>
 <p>Le Conseil nomme un Directeur chargé du fonctionnement de la coopérative.
 Il est responsable du personnel et de la mise en oeuvre des décisions prises par le conseil d'administration.
-Directeur général : Philippe Saudin</p>
+</p>
 </div>
 
 <div class="presentation mx-5 my-5 p-3 border rounded border-warning ">

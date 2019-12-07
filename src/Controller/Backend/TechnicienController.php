@@ -19,7 +19,7 @@ class TechnicienController extends AbstractController
     public function showtechlist(UserRepository $techRepository, Request $request, PaginatorInterface $paginator)
     {
         $users = $paginator->paginate($techRepository->findAllTechnicien(),
-        $request->query->getInt('page', 1), 5
+        $request->query->getInt('page', 1), 7
         );
 
         $user = new User();

@@ -20,7 +20,7 @@ class UserController extends AbstractController
     public function showlist(UserRepository $userRepository, Request $request, PaginatorInterface $paginator)
     {
         $users = $paginator->paginate($userRepository->findAllMemberOnly(),
-        $request->query->getInt('page', 1), 5
+        $request->query->getInt('page', 1), 8
     );
         //dump($users);
        
@@ -122,7 +122,7 @@ class UserController extends AbstractController
     public function showalllist(UserRepository $userRepository, Request $request, PaginatorInterface $paginator)
     {
         $users = $paginator->paginate($userRepository->findAll(),
-        $request->query->getInt('page', 1), 6
+        $request->query->getInt('page', 1), 10
     );
        
         //$clients= $userRepository->findByTechnicien($this->getUser()->getEmail());
