@@ -2,7 +2,19 @@
 
 {% block title %}Mon Profil{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+    {% include 'frontend/tech/layout/_tech_header.html.twig' %}
+{% endblock %}
+
 {% block body %}
+
+
 
  
 
@@ -12,7 +24,8 @@
 
         <div class="row justify-content-around text-center">
             <a href="{{ path('tech_clients_index') }}" class="col-10 col-sm-5 btn btn-warning mb-4">Liste de mes clients</a>
-            <a href="#" class="col-10 col-sm-5 btn btn-warning mb-4">Ventes du mois</a>
+            <a href="{{ path('tech_orders_index') }}" class="col-10 col-sm-5 btn btn-warning mb-4">Mes commandes en cours</a>
+             <a href="{{ path('tech_encours_index') }}" class="col-10 col-sm-5 btn btn-warning mb-4">Encours Adhérents</a>
            
            
         </div>

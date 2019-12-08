@@ -2,7 +2,15 @@
 
 {% block title %}Profil Membre{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
 
+{% block header %}
+    {{ parent() }}
+    {% include 'frontend/tech/layout/_tech_header.html.twig' %}
+{% endblock %}
 
 {% block body %}
 
@@ -13,28 +21,14 @@
 			
 			{% if is_granted('ROLE_TECH') %}
 				<h1 class="text-white">Mon Profil</h1>
-				{# Détails du profil du User loggué #}
-				<p>
-					Utilisateur : {{user.society}}
-				</p>
-				<p>
-					Email : {{user.email}}
-				</p>
-				<p>
-					Nom : {{user.lastname}}
-				</p>
-				<p>
-					Prenom : {{user.firstname}}
-				</p>
-				<p>
-					Adresse : {{user.adress}}
-				</p>
-				<p>
-					Code Postal : {{user.postalCode}}
-				</p>
-				<p>
-					Ville : {{user.city}}
-				</p>
+				{# Détails de l'adhérent #}
+				<p>Utilisateur : {{user.society}}</p>
+				<p>Email : {{user.email}}</p>
+				<p>Nom : {{user.lastname}}</p>
+				<p>Prenom : {{user.firstname}}</p>
+				<p>Adresse : {{user.adress}}</p>
+				<p>Code Postal : {{user.postalCode}}</p>
+				<p>Ville : {{user.city}}</p>
 {#}
 				<p>
 					Crée le : {{user.createdAt | date('d-m-Y')}}
@@ -48,16 +42,19 @@
 						<span> - {{ role }}  </span>
 					{% endfor %}
 				</p>
-				<p>
-					Technicien : {{user.technicien}}
-				</p>
+				
 				
 		</div>
 		<div class="profilchoice w-50">
-			<button type="button" class="btn btn-warning btn-lg btn-block">Encours</button>
-			<button type="button" class="btn btn-warning btn-lg btn-block">Mes dernières commandes</button>
-			<button type="button" class="btn btn-warning btn-lg btn-block">Mes produits</button>
-			<button type="button" class="btn btn-warning btn-lg btn-block">Mes tarifs</button>
+			{% if user.encours < - 10000 %}
+			<span type="button" class="btn btn-danger btn-lg btn-block">Encours : {{user.encours}}</span>
+			{% else %}
+			<button type="button" class="btn btn-success btn-lg btn-block">Encours : {{user.encours}}</button>		
+			{% endif %}
+
+			<a href="{{ path('tech_client_last_orders', {'id' : user.id}) }}"><button type="button" class="btn btn-warning btn-lg btn-block">Dernières commandes du client</button></a>
+			<button type="button" class="btn btn-warning btn-lg btn-block">Produits du client</button>
+			<button type="button" class="btn btn-warning btn-lg btn-block">Tarifs du client</button>
 		
 			{# Flash Message{#}
 			{% for label, messages in app.flashes(['success', 'warning', 'danger', 'info']) %}

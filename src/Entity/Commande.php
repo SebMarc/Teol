@@ -26,6 +26,35 @@ class Commande
      */
     private $amount;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tech")
+     */
+    private $tech;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $customer;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    
+
+
+
+    
+    
+    public function __construct()
+    
+    {
+       $this->createdAt = new \DateTime();
+        
+       
+    }
 
     public function getId(): ?int
     {
@@ -55,6 +84,46 @@ class Commande
 
         return $this;
     }
+
+    public function getTech(): ?User
+    {
+        return $this->tech;
+    }
+
+    public function setTech(?User $tech): self
+    {
+        $this->tech = $tech;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?user
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?user $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+
+
+
 
    
 }

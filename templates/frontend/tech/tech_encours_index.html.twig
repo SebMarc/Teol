@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Encours Clients{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+    {% include 'frontend/tech/layout/_tech_header.html.twig' %}
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+<h1 class="text-center mt-4 mb-4">Liste des encours adhérents</h1>
+
+    <div class="container-fluid text-center">
+
+    <div class="d-flex justify-content-around flex-wrap">
+
+
+  
+
+        <table class="table table-striped  text-center tableau" >
+            <thead>
+                <tr class="trhead">
+                    <th scope="col">Adhérent</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Voir Client</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in encours %}
+                    <tr class="align-middle">
+                        <td class="align-middle">{{ user.society }}</td>
+                            {% if user.encours < - 10000 %}
+                            <td class="align-middle text-danger">{{ user.encours }}</td>
+                            {% else %}
+                            <td class="align-middle text-success">{{ user.encours }}</td>		
+                            {% endif %}
+    
+                        <td class="table__data--view align-middle">
+                            <a href="{{path('tech_client_view', {'id' : user.id}) }}"><i class="fa fa-eye view__icon"></i></a>
+                        </td>                    
+                    </tr>
+                {% else %}
+                    <tr class="text-center">
+                        <td colspan="8">Aucun résultat !</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            {{ knp_pagination_render(encours) }}
+        </div>
+    </div>
+{% endblock %}

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -80,23 +82,31 @@ class User implements UserInterface
 
     private $message;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="tech")
+     */
+    private $tech;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="customer")
+     */
+    private $commandes;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $encours;
+
+
     
 
 
 
-    
-
-    
-
-    
-    /*public function __toString()
-    {
-        return $this->lastname . " " . $this->firstname;
-    }*/
-    
+      
 
     public function __toString()
     {
+        //return $this->firstname . " " . $this->lastname;
         return $this->email;
     }
 
@@ -106,6 +116,10 @@ class User implements UserInterface
     
     {
         $this->enable     = true;
+        $this->commande = new ArrayCollection();
+        $this->tech = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
+        
        
     }
 
@@ -315,4 +329,80 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getTech(): Collection
+    {
+        return $this->tech;
+    }
+
+    public function addTech(Commande $tech): self
+    {
+        if (!$this->tech->contains($tech)) {
+            $this->tech[] = $tech;
+            $tech->setTech($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTech(Commande $tech): self
+    {
+        if ($this->tech->contains($tech)) {
+            $this->tech->removeElement($tech);
+            // set the owning side to null (unless already changed)
+            if ($tech->getTech() === $this) {
+                $tech->setTech(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->contains($commande)) {
+            $this->commandes->removeElement($commande);
+            // set the owning side to null (unless already changed)
+            if ($commande->getCustomer() === $this) {
+                $commande->setCustomer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEncours(): ?int
+    {
+        return $this->encours;
+    }
+
+    public function setEncours(int $encours): self
+    {
+        $this->encours = $encours;
+
+        return $this;
+    }
+
+    
 }

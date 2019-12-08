@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use App\Entity\Commande;
 use App\Entity\Product;
-use App\Entity\Technicien;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -71,16 +70,14 @@ class AppFixtures extends Fixture
                         ->setCity($faker->city);
                         $technicienList [] = $tech;
                        
-                        
-            
       
             $manager->persist($tech);
         }
 
         
 
-        //Création de 10 Users
-        for($i = 0 ; $i <=9 ; $i++) {
+        //Création de 100 Users
+        for($i = 0 ; $i <=99 ; $i++) {
         $customer = new User();
         $customer   ->setEmail(sprintf('member%d@member.fr', $i))
                     ->setRoles(['ROLE_MEMBER']);
@@ -94,7 +91,22 @@ class AppFixtures extends Fixture
                     ->setPostalCode($faker->numberBetween(1000, 9000) * 10)
                     ->setCity($faker->city);
                     $randomtechnicien = $technicienList[mt_rand(0, count($technicienList) - 1)];
-        $customer   ->setTechnicien($randomtechnicien);
+        $customer   ->setTechnicien($randomtechnicien)
+                    ->setEncours($faker->numberBetween($min = -30000, $max = 5000));
+
+                    
+                    // Creation de 5 commandes
+                    for($j = 0 ; $j <=4 ; $j++) {
+                        $order = new Commande();
+                        $order  ->setNumber($faker->numberBetween(1000, 9000))
+                                ->setAmount($faker->numberBetween(1000, 9000))                                
+                                ->setTech($randomtechnicien)                        
+                                ->setCustomer($customer);
+                        
+                        $manager->persist($order)
+                        ;
+
+                    }
                     $userList [] = $customer;
                     $manager->persist($customer)
                     ;
@@ -102,31 +114,18 @@ class AppFixtures extends Fixture
 
         
 
-           
-        
 
         // Creation de 5 Products
-        for($i = 0 ; $i <=4 ; $i++) {
+        for($i = 0 ; $i <=99 ; $i++) {
             $product = new Product();
-            $product    ->setName($faker->word);
+            $product    ->setName(sprintf('Produit Teol %d', $i));
             $productList[] = $product;
             $manager->persist($product)
             ;
 
         }
 
-        // Creation de 5 commandes
-        for($i = 0 ; $i <=4 ; $i++) {
-            $order = new Commande();
-            $order  ->setNumber($faker->numberBetween(1000, 9000))
-                    ->setAmount($faker->numberBetween(1000, 9000));
-            
-                    //$randomproduct = $productList[mt_rand(0, count($productList)-1)];
-            //$order  ->addProduct($randomproduct)
-            $manager->persist($order)
-            ;
-
-        }
+       
 
         // Creation de 5 categories
         for($i = 0 ; $i <=4 ; $i++) {
@@ -137,21 +136,6 @@ class AppFixtures extends Fixture
             ;
         }
 
-        /* Creation de 9 magasins
-        for($i = 0 ; $i<= 4 ; $i++) {
-            $shop = new Magasin();
-            $shop   ->setName($faker->company())
-            ->setAdress($faker->streetAddress())
-            ->setPostalCode($faker->numberBetween(1000, 9000) * 10)
-            ->setCity($faker->city())
-            ->setPhone($faker->phoneNumber())
-            ->setManager($faker->name())
-            ->setClose($faker->dayOfWeek())
-            ->setFax($faker->phoneNumber())
-            ->setEnable(true);
-            $manager->persist($shop)
-            ;
-        }*/
 
         $manager->flush();
     }

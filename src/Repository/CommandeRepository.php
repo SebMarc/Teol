@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Commande;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Commande|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,45 @@ class CommandeRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Commande::class);
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllOrderByTechnicien($t) :Query //Ok
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.tech = :tech')
+        ->setParameter('tech', $t)
+        ->getQuery();
+      
+        
+    }
+
+     /**
+     * @return Query
+     */
+    public function findAllOrderByClient($t) :Query //Ok
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.customer = :cust')
+        ->setParameter('cust', $t)
+        ->getQuery();
+      
+        
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllOrderPerOneClient($t) :Query //Ok
+    {
+        return $this->createQueryBuilder('c')
+        ->where('c.customer = :cust')
+        ->setParameter('cust', $t)
+        ->getQuery();
+      
+        
     }
 
     // /**

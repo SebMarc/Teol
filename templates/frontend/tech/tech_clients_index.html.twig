@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
 {% endblock %}
 
+{% block header %}
+    {{ parent() }}
+    {% include 'frontend/tech/layout/_tech_header.html.twig' %}
+{% endblock %}
+
 
 
 {% block body %}
@@ -56,7 +61,7 @@
                         <td class="align-middle">{{ user.enable ? "Oui" : "Non" }}</td>
                         
                         
-                        <td class="table__data--edit align-middle">
+                        <td class="table__data--view align-middle">
                             <a href="{{ path('tech_client_view', {'id' : user.id}) }}"><i class="fa fa-eye view__icon"></i></a>
                         </td>
                        

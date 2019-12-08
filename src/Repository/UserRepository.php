@@ -40,16 +40,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @return Query
      */
-    public function findAllClientByTechnicien($t) :Query //Ok
+    public function findAllClientByTechnicien($t) :Query 
     {
         return $this->createQueryBuilder('u')
         ->where('u.technicien = :tech')
         ->setParameter('tech', $t)
         ->getQuery();
-      
-        
+ 
     }
 
+    
     
     /**
      * @return Query
@@ -65,7 +65,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
 
-    public function findAllTechnicienForm() { //ok
+    public function findAllTechnicienForm() { 
         return $this->createQueryBuilder('u')
         ->where('u.roles LIKE :role')
         ->setParameter('role','%ROLE_TECH%');
@@ -76,7 +76,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @return Query
      */
-    public function findAllTechnicien() :Query {       //ok
+    public function findAllTechnicien() :Query {       
         return $this->createQueryBuilder('u')
         ->where('u.roles LIKE :role')
         ->setParameter('role','%ROLE_TECH%')
@@ -92,8 +92,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ->getQuery()
         ->getResult();
         return $qb;
-        
      }
+
+     /**
+     * @return Query
+     */
+    public function findAllEncoursByTechnicien($t) :Query {      
+        return $this->createQueryBuilder('u')
+        ->where('u.technicien = :tech')
+        ->setParameter('tech', $t)
+        ->getQuery();
+     }
+
+    
+
+
+
+     
 
     // /**
     //  * @return User[] Returns an array of User objects

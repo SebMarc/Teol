@@ -28,11 +28,13 @@
 						<span> - {{ role }}  </span>
 					{% endfor %}
 				</p>
+				{% if is_granted('ROLE_MEMBER') %}
 				<a href="{{ path('user_profil_update') }}" class="btn btn-warning">Modifier mon Profil<i class="fas"></i></a>
+				{% endif %}
 		</div>
 		<div class="profilchoice w-50">
 			<a type="button" class="btn btn-warning btn-lg btn-block">Encours</a>
-			<a type="button" class="btn btn-warning btn-lg btn-block">Mes dernières commandes</a>
+			<a href="{{ path('last_orders', {'id' : user.id}) }}" type="button" class="btn btn-warning btn-lg btn-block">Mes dernières commandes</a>
 			<a type="button" class="btn btn-warning btn-lg btn-block">Mes produits</a>
 			<a type="button" class="btn btn-warning btn-lg btn-block">Mes tarifs</a>
 			
@@ -45,6 +47,7 @@
 				{% endfor %}
 			{% endfor %} 
 		</div>
+		{% if is_granted('ROLE_MEMBER') %}
 		<div class="user-form text-center">
 			
 			
@@ -60,6 +63,7 @@
 			
 	
 		</div>
+		{% endif %}
 		{% endif %}
 	</div>
 {% endblock %}

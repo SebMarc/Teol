@@ -4,7 +4,9 @@ namespace App\Controller\Frontend;
 
 use App\Entity\User;
 use App\Form\UserUpdateProfilType;
+use App\Repository\CommandeRepository;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,6 +66,25 @@ class UserController extends AbstractController
 
         return $this->render('frontend/user/user_profil_update.html.twig', [
             'update_form' => $updateForm->createView()
+        ]);
+    }
+
+     /**
+     * @Route("/user/lastorders", name="last_orders")
+     */
+    public function orderslist(CommandeRepository $cr, Request $request, PaginatorInterface $paginator) {
+        if (!$user = $this->getUser()) {
+
+            throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
+        }
+        dump($user);
+        $orders= $paginator->paginate($cr->findAllOrderPerOneClient($this->getUser()->getId()),
+        $request->query->getInt('page', 1), 15
+    );
+        dump($orders);
+
+        return $this->render('frontend/user/last_orders.html.twig', [
+            'orders' => $orders
         ]);
     }
 

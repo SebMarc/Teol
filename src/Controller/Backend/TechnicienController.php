@@ -21,7 +21,7 @@ class TechnicienController extends AbstractController
         $users = $paginator->paginate($techRepository->findAllTechnicien(),
         $request->query->getInt('page', 1), 7
         );
-
+        
         $user = new User();
         $form = $this->createForm(UserUpdateProfilType::class, $user);
         $form->handleRequest($request);
