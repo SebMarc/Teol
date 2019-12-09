@@ -50,6 +50,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     
+
+    
     
     /**
      * @return Query
@@ -104,7 +106,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ->getQuery();
      }
 
-     public function findByPartialUserSociety($term) {
+    public function findByPartialUserSociety($term) {
          $qb = $this    ->createQueryBuilder('u')
                         ->where('u.society LIKE :searchSociety')
                         ->setParameter('searchSociety',  '%' . $term . '%')
@@ -113,10 +115,33 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                         return $qb->getQuery()->getResult();
      }
 
-     public function findByPartialUserLastname($term) {
+    public function findByPartialUserLastname($term) {
         $qb = $this    ->createQueryBuilder('u')
                        ->where('u.lastname LIKE :searchLastname')
                        ->setParameter('searchLastname',  '%' . $term . '%')
+                       ->orderBy('u.lastname', 'ASC');
+
+                       return $qb->getQuery()->getResult();
+    }
+
+    public function findByPartialSocietyAllClientByTechnicien($term, $t) 
+    {
+        $qb = $this    ->createQueryBuilder('u')
+                        ->where('u.society LIKE :searchSociety')
+                        ->andWhere('u.technicien = :tech')
+                        ->setParameter('searchSociety',  '%' . $term . '%')
+                        ->setParameter('tech', $t)
+                        ->orderBy('u.society', 'ASC');
+
+                        return $qb->getQuery()->getResult();
+    }
+
+    public function findByPartialLastnameAllClientByTechnicien($term, $t) {
+        $qb = $this    ->createQueryBuilder('u')
+                       ->where('u.lastname LIKE :searchLastname')
+                       ->andWhere('u.technicien = :tech')
+                       ->setParameter('searchLastname',  '%' . $term . '%')
+                       ->setParameter('tech', $t)
                        ->orderBy('u.lastname', 'ASC');
 
                        return $qb->getQuery()->getResult();

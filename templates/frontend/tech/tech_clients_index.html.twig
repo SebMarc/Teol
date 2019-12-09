@@ -20,6 +20,20 @@
 
 <h1 class="text-center mt-4 mb-4">Liste de mes clients</h1>
 
+    <div class="d-flex justify-content-center mb-2 ">
+    <form class="form-inline" action="{{ path('tech_clients_index') }}" method="POST">
+        <input class="form-control mr-sm-2" type="search" name="society" placeholder="Par société" aria-label="Search" minlength=3>
+
+        <button class="btn btn-dark my-2 my-sm-0 mr-3" type="submit">Lancer</button>
+    </form>
+
+    <form class="form-inline" action="{{ path('tech_clients_index') }}" method="POST">
+        <input class="form-control mr-sm-2" type="search" name="lastname" placeholder="Par nom de famille" aria-label="Search" minlength=3>
+
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Lancer</button>
+    </form>
+    </div>
+
     <div class="container-fluid text-center">
 
     <div class="d-flex justify-content-around flex-wrap">

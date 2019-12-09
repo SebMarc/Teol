@@ -28,10 +28,10 @@ class CommandeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
         ->where('c.tech = :tech')
         ->setParameter('tech', $t)
-        ->getQuery();
-      
-        
+        ->getQuery();  
     }
+
+  
 
      /**
      * @return Query
@@ -41,9 +41,7 @@ class CommandeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
         ->where('c.customer = :cust')
         ->setParameter('cust', $t)
-        ->getQuery();
-      
-        
+        ->getQuery();  
     }
 
     /**
@@ -55,9 +53,9 @@ class CommandeRepository extends ServiceEntityRepository
         ->where('c.customer = :cust')
         ->setParameter('cust', $t)
         ->getQuery();
-      
-        
     }
+
+    
 
     // /**
     //  * @return Commande[] Returns an array of Commande objects

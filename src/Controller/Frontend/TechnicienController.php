@@ -50,14 +50,38 @@ class TechnicienController extends AbstractController
 
             throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
         }
-        dump($user);
-        $clients= $paginator->paginate($userRepository->findAllClientByTechnicien($this->getUser()->getEmail()),
-        $request->query->getInt('page', 1), 15
-    );
+        //dump($user);
+
+        $searchSociety = $request->request->get('society');
+        $searchLastname = $request->request->get('lastname');
+
+        if($searchSociety) {
+            $clients = $paginator->paginate(
+                $userRepository->findByPartialSocietyAllClientByTechnicien($searchSociety, $user->getEmail()),
+                $request->query->getInt('page', 1),8
+        );
+        }
+        elseif ($searchLastname) {
+            $clients = $paginator->paginate(
+                $userRepository->findByPartialLastnameAllClientByTechnicien($searchLastname, $user->getEmail()),
+                $request->query->getInt('page', 1),
+                8
+            );} 
+        
+        else {
+            $clients= $paginator->paginate(
+            $userRepository->findAllClientByTechnicien($this->getUser()->getEmail()),
+            $request->query->getInt('page', 1),
+            15
+        );
+        }
         dump($clients);
 
         return $this->render('frontend/tech/tech_clients_index.html.twig', [
-            'clients' => $clients
+            'clients' => $clients,
+            //'searchSociety' => $searchSociety,
+            //'searchLastname' => $searchLastname
+
         ]);
     }
 
@@ -69,16 +93,16 @@ class TechnicienController extends AbstractController
 
             throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
         }
-        dump($user);
-        $orders= $paginator->paginate($cr->findAllOrderByTechnicien($this->getUser()->getId()),
-        $request->query->getInt('page', 1), 15
-    );
-        dump($orders);
+            $orders= $paginator->paginate($cr->findAllOrderByTechnicien($this->getUser()->getId()),
+            $request->query->getInt('page', 1), 15
+        );
 
         return $this->render('frontend/tech/tech_orders_index.html.twig', [
             'orders' => $orders
         ]);
     }
+
+
 
     /**
      * @Route("/tech/client_last_orders/{id}", name="tech_client_last_orders", requirements={"id"="\d+"})
