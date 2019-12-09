@@ -104,6 +104,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ->getQuery();
      }
 
+     public function findByPartialUserSociety($term) {
+         $qb = $this    ->createQueryBuilder('u')
+                        ->where('u.society LIKE :searchSociety')
+                        ->setParameter('searchSociety',  '%' . $term . '%')
+                        ->orderBy('u.society', 'ASC');
+
+                        return $qb->getQuery()->getResult();
+     }
+
+     public function findByPartialUserLastname($term) {
+        $qb = $this    ->createQueryBuilder('u')
+                       ->where('u.lastname LIKE :searchLastname')
+                       ->setParameter('searchLastname',  '%' . $term . '%')
+                       ->orderBy('u.lastname', 'ASC');
+
+                       return $qb->getQuery()->getResult();
+    }
+
     
 
 

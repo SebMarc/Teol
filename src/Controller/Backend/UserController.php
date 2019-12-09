@@ -19,31 +19,55 @@ class UserController extends AbstractController
      */
     public function showlist(UserRepository $userRepository, Request $request, PaginatorInterface $paginator)
     {
-        $users = $paginator->paginate($userRepository->findAllMemberOnly(),
-        $request->query->getInt('page', 1), 8
-    );
-        //dump($users);
-       
-        $user = new User();
-        $form = $this->createForm(UserUpdateProfilType::class, $user);
-        $form->handleRequest($request);
+        $searchSociety = $request->request->get('society');
+        $searchLastname = $request->request->get('lastname');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $manager= $this->getDoctrine()->getManager();
-            $manager->persist($user);
-            $manager->flush();
-
-            $this->addFlash(
-                'success',
-                'L\'utilisateur a été correctement intégré!'
-            );
-
-            return $this->redirectToRoute('backend_users_list');
+        if($searchSociety) {
+            $users = $paginator->paginate(
+                $userRepository->findByPartialUserSociety($searchSociety),
+                $request->query->getInt('page', 1),8
+        );
         }
-        return $this->render('backend/user/index.html.twig', [
+        elseif ($searchLastname) {
+            $users = $paginator->paginate(
+                $userRepository->findByPartialUserLastname($searchLastname),
+                $request->query->getInt('page', 1),
+                8
+            );} 
+        
+        else {
+            $users = $paginator->paginate(
+                $userRepository->findAllMemberOnly(),
+                $request->query->getInt('page', 1),
+                8
+            );
+        }
+        
+            //dump($users);
+       
+            $user = new User();
+            $form = $this->createForm(UserUpdateProfilType::class, $user);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $manager= $this->getDoctrine()->getManager();
+                $manager->persist($user);
+                $manager->flush();
+
+                $this->addFlash(
+                    'success',
+                    'L\'utilisateur a été correctement intégré!'
+                );
+
+                return $this->redirectToRoute('backend_users_list');
+            }
+        
+            return $this->render('backend/user/index.html.twig', [
             'users' => $users,
+            'searchSociety' => $searchSociety,
             'form' => $form->createView()
         ]);
+        
 
     }
 
@@ -121,12 +145,34 @@ class UserController extends AbstractController
      */
     public function showalllist(UserRepository $userRepository, Request $request, PaginatorInterface $paginator)
     {
-        $users = $paginator->paginate($userRepository->findAll(),
-        $request->query->getInt('page', 1), 10
-    );
-       
-        //$clients= $userRepository->findByTechnicien($this->getUser()->getEmail());
+        $searchSociety = $request->request->get('society');
+        $searchLastname = $request->request->get('lastname');
 
+        if ($searchSociety) {
+            $users = $paginator->paginate(
+                $userRepository->findByPartialUserSociety($searchSociety),
+                $request->query->getInt('page', 1),
+                8
+            );} 
+
+            elseif ($searchLastname) {
+                $users = $paginator->paginate(
+                    $userRepository->findByPartialUserLastname($searchLastname),
+                    $request->query->getInt('page', 1),
+                    8
+                );} 
+            
+            
+            else {
+                $users = $paginator->paginate(
+                $userRepository->findAll(),
+                $request->query->getInt('page', 1),
+                10
+            );
+            }
+        
+        
+ 
         $user = new User();
         $form = $this->createForm(UserUpdateProfilType::class, $user);
         $form->handleRequest($request);
