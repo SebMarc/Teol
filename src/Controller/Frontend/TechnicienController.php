@@ -93,9 +93,29 @@ class TechnicienController extends AbstractController
 
             throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
         }
-            $orders= $paginator->paginate($cr->findAllOrderByTechnicien($this->getUser()->getId()),
-            $request->query->getInt('page', 1), 15
-        );
+
+        $searchorderNumber = $request->request->get('ordernumber');
+        $searchMember = $request->request->get('member');
+
+        if ($searchorderNumber) {
+            $orders = $paginator->paginate(
+                $cr->findByOrderNumber($searchorderNumber, $this->getUser()->getId()),
+                $request->query->getInt('page', 1),
+                8
+            );}
+            elseif ($searchMember) {
+                $orders = $paginator->paginate(
+                    $cr->findByMember($searchMember,$this->getUser()->getId()),
+                    $request->query->getInt('page', 1),
+                    8
+                );}
+            else {
+                $orders= $paginator->paginate(
+                $cr->findAllOrderByTechnicien($this->getUser()->getId()),
+                $request->query->getInt('page', 1),
+                15
+            );
+            }
 
         return $this->render('frontend/tech/tech_orders_index.html.twig', [
             'orders' => $orders

@@ -98,7 +98,8 @@ class AppFixtures extends Fixture
                     // Creation de 5 commandes
                     for($j = 0 ; $j <=4 ; $j++) {
                         $order = new Commande();
-                        $order  ->setNumber($faker->numberBetween(1000, 9000))
+                        $stringnumber = strval($faker->numberBetween(1000, 9000));
+                        $order  ->setNumber($stringnumber)
                                 ->setAmount($faker->numberBetween(1000, 9000))                                
                                 ->setTech($randomtechnicien)                        
                                 ->setCustomer($customer);

@@ -147,6 +147,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                        return $qb->getQuery()->getResult();
     }
 
+    public function findByMember($term, $t) {
+        $qb = $this    ->createQueryBuilder('u')
+                       ->where('u.society = :searchCustomer')
+                       ->andWhere('u.technicien = :tech')
+                       ->setParameter('tech', $t )
+                       ->setParameter('searchCustomer', '%' . $term . '%');
+                      
+
+                       return $qb->getQuery()->getResult();
+    }
+
     
 
 

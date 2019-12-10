@@ -55,7 +55,29 @@ class CommandeRepository extends ServiceEntityRepository
         ->getQuery();
     }
 
-    
+    public function findByOrderNumber($term, $t) {
+        $qb = $this    ->createQueryBuilder('c')
+                       ->where('c.number LIKE :searchOrder')
+                       ->andWhere('c.tech = :tech')
+                       ->setParameter('tech', $t )
+                       ->setParameter('searchOrder', $term );
+                      
+                       return $qb->getQuery()->getResult();
+    }
+
+    public function findByMember($term, $t)
+     {
+        $qb = $this     ->createQueryBuilder('c')
+                        ->innerJoin('c.customer', 'cu')
+                        ->addSelect('cu')
+                        ->where('cu.society LIKE :searchCustomer')
+                        ->andWhere('c.tech = :tech')
+                        ->setParameter('searchCustomer', '%' . $term . '%')
+                        ->setParameter('tech', $t )
+                        ->orderBy('c.number', 'DESC');
+                      
+                       return $qb->getQuery()->getResult();
+    }
 
     // /**
     //  * @return Commande[] Returns an array of Commande objects
