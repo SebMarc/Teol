@@ -64,7 +64,6 @@ class UserController extends AbstractController
         
             return $this->render('backend/user/index.html.twig', [
             'users' => $users,
-            //'searchSociety' => $searchSociety,
             'form' => $form->createView()
         ]);
         

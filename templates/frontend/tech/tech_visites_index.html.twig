@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Visites Adhérent{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+    {% include 'frontend/tech/layout/_tech_header.html.twig' %}
+{% endblock %}
+
+
+
+{% block body %}
+
+<div>
+{# Flash Message{#}
+    {% for label, messages in app.flashes(['success', 'warning', 'danger', 'info']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} flash text-center mt-5">
+            {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+
+<h1 class="text-center mt-4 mb-4">Liste de mes visites</h1>
+
+    <div class="d-flex justify-content-center mb-2 ">
+    <form class="form-inline" action="{{ path('tech_visites_index') }}" method="POST">
+        <input class="form-control mr-sm-2" type="search" name="society" placeholder="Par société" aria-label="Search" minlength=3>
+
+        <button class="btn btn-dark my-2 my-sm-0 mr-3" type="submit">Lancer</button>
+    </form>
+
+    <form class="form-inline" action="{{ path('tech_visites_index') }}" method="POST">
+        <input class="form-control mr-sm-2" type="search" name="date" placeholder="Par date" aria-label="Search" minlength=3>
+
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Lancer</button>
+    </form>
+    </div>
+
+    <div class="container-fluid text-center">
+
+    <div class="d-flex justify-content-around flex-wrap">
+        <button type="button" class="btn btn-warning mb-4" data-toggle="modal" data-target="#AddUniversModal">➕ Ajouter une visite</button>
+    </div>
+
+    <div class="modal fade mx-auto" id="AddUniversModal" tabindex="-1" role="dialog" aria-labelledby="AddUniversModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddUniversModalLabel">Ajouter une visite</h5>
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+               {% form_theme form with ['bootstrap_4_horizontal_layout.html.twig'] only %}
+                {{ form_start(form) }}
+                    <div class="modal-body">
+                       
+                        {{ form_row(form.user) }}
+                        {{ form_row(form.createdAt) }}
+                        {{ form_row(form.content) }}
+              
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+
+  
+
+        <table class="table table-striped  text-center tableau" >
+            <thead>
+                <tr class="trhead">
+
+                    <th scope="col">Société</th>
+                    <th scope="col">Date de la visite</th>
+                    <th scope="col">Résumé</th>
+                    <th scope="col">Modifier</th>
+                    <th scope="col">Voir</th>
+                    <th scope="col">Supprimer</th>
+                    
+                 
+                
+                </tr>
+            </thead>
+            <tbody>
+                {% for visite in visites %}
+                    <tr class="align-middle">
+                      
+                        <td class="align-middle">{{ visite.user.society }}</td>
+                        <td class="align-middle">{{ visite.createdAt | date('d-m-Y') }}</td>
+                        <td class="align-middle">{{ visite.content }}</td>
+                       
+                        
+                        
+                        <td class="table__data--view align-middle">
+                            <a href="{{ path('tech_visites_index') }}"><i class="fa fa-eye view__icon"></i></a>
+                        </td>
+                        <td class="table__data--view align-middle">
+                            <a href="{{ path('tech_visites_index') }}"><i class="fa fa-edit edit__icon"></i></a>
+                        </td>
+                        <td class="table__data--view align-middle">
+                            <a href="{{ path('tech_visites_index') }}"><i class="fa fa-trash-o delete__icon"></i></a>
+                        </td>
+                       
+                    </tr>
+                {% else %}
+                    <tr class="text-center">
+                        <td colspan="8">Aucun résultat !</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            {{ knp_pagination_render(visites) }}
+        </div>
+    </div>
+{% endblock %}

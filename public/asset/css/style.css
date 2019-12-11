@@ -122,3 +122,7 @@ textarea {
 .table-striped>tbody>tr:nth-child(2n+1)>th {
     background-color: rgb(230, 164, 79);
 }
+
+.page-item {
+    background-color: rgb(230, 164, 79);
+}

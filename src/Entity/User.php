@@ -97,6 +97,16 @@ class User implements UserInterface
      */
     private $encours;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Visite", mappedBy="user")
+     */
+    private $visites;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Visite", mappedBy="tech")
+     */
+    private $techvisite;
+
 
     
 
@@ -108,6 +118,7 @@ class User implements UserInterface
     {
         //return $this->firstname . " " . $this->lastname;
         return $this->email;
+        //return $this->society;
     }
 
 
@@ -119,6 +130,8 @@ class User implements UserInterface
         $this->commande = new ArrayCollection();
         $this->tech = new ArrayCollection();
         $this->commandes = new ArrayCollection();
+        $this->visites = new ArrayCollection();
+        $this->techvisite = new ArrayCollection();
         
        
     }
@@ -400,6 +413,68 @@ class User implements UserInterface
     public function setEncours(int $encours): self
     {
         $this->encours = $encours;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Visite[]
+     */
+    public function getVisites(): Collection
+    {
+        return $this->visites;
+    }
+
+    public function addVisite(Visite $visite): self
+    {
+        if (!$this->visites->contains($visite)) {
+            $this->visites[] = $visite;
+            $visite->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVisite(Visite $visite): self
+    {
+        if ($this->visites->contains($visite)) {
+            $this->visites->removeElement($visite);
+            // set the owning side to null (unless already changed)
+            if ($visite->getUser() === $this) {
+                $visite->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Visite[]
+     */
+    public function getTechvisite(): Collection
+    {
+        return $this->techvisite;
+    }
+
+    public function addTechvisite(Visite $techvisite): self
+    {
+        if (!$this->techvisite->contains($techvisite)) {
+            $this->techvisite[] = $techvisite;
+            $techvisite->setTech($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTechvisite(Visite $techvisite): self
+    {
+        if ($this->techvisite->contains($techvisite)) {
+            $this->techvisite->removeElement($techvisite);
+            // set the owning side to null (unless already changed)
+            if ($techvisite->getTech() === $this) {
+                $techvisite->setTech(null);
+            }
+        }
 
         return $this;
     }
