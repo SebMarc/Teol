@@ -237,4 +237,73 @@ class TechnicienController extends AbstractController
 
         ]);
     }
+
+    /**
+     * @Route("tech/visite/delete/{id}",
+     *     name="tech_visite_delete",
+     *     requirements={"id"="\d+"},
+     *     methods={"POST"})
+     */
+    public function delete(Request $request, Visite $visite = null)
+    {
+        if (!$visite) {
+            throw $this->createNotFoundException('L\'utilisateur que vous recherchez n\'existe pas !');
+        }
+
+        $submittedToken = $request->request->get('token');
+
+        if ($this->isCsrfTokenValid('delete-item', $submittedToken)) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($visite);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                'La visite a été supprimée avec succès !'
+            );
+        }
+        else {
+
+            $this->addFlash(
+                'error',
+                'Une erreur s\'est produite. Veuillez réessayer plus tard !'
+            );
+        }
+
+        return $this->redirectToRoute('tech_visites_index');
+    }
+
+    /**
+     * @Route("tech/visite/update/{id}", name="tech_visite_update", methods={"GET", "POST"}, requirements={"id"="\d+"},)
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
+     *
+     * @throws UnauthorizedHttpException when the user is not logged in
+     */
+    public function visiteUpdate(Request $request, Visite $visite)
+    {
+        
+        $updateForm = $this->createForm(VisiteFormType::class, $visite);
+        $updateForm->handleRequest($request);
+
+        if ($updateForm->isSubmitted() && $updateForm->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
+
+            $this->addFlash(
+                    'success',
+                    'Votre visite a bien été modifiée'
+            );
+
+            return $this->redirectToRoute('tech_visites_index');
+        }
+
+        return $this->render('frontend/tech/tech_visite_update.html.twig', [
+            'update_form' => $updateForm->createView()
+        ]);
+    }
+
 }

@@ -126,3 +126,14 @@ textarea {
 .page-item {
     background-color: rgb(230, 164, 79);
 }
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#visite_form_contentdetails {
+    height: 200px;
+    overflow: scroll;
+}

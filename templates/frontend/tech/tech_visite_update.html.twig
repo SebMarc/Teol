@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
+{% block title %}Modification de visite{% endblock %}
+
+{% block body %}
+
+
+
+<div class="user-form w-50 mx-auto ">
+<h2 class="text-white text-center">Modification de visite</h2>
+{{ form_start(update_form) }}
+
+  {{ form_row(update_form.createdAt) }}
+  
+  {{ form_row(update_form.user) }}
+  
+  {{ form_row(update_form.content) }}
+
+  {{ form_row(update_form.contentdetails) }}
+
+ 
+
+
+ 
+  
+ <a href="{{ path('tech_visites_index') }}" class="btn btn-secondary">Retour à la liste</a>
+      <input type="submit" class="btn btn-warning" value="Modifier" id="submit">
+    
+{{ form_end(update_form) }}
+ 
+</div> 
+
+{% endblock %}

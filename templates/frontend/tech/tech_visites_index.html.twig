@@ -47,10 +47,10 @@
     <div class="container-fluid text-center">
 
     <div class="d-flex justify-content-around flex-wrap">
-        <button type="button" class="btn btn-warning mb-4" data-toggle="modal" data-target="#AddUniversModal">➕ Ajouter une visite</button>
+        <button type="button" class="btn btn-warning mb-4" data-toggle="modal" data-target="#AddVisiteModal">➕ Ajouter une visite</button>
     </div>
 
-    <div class="modal fade mx-auto" id="AddUniversModal" tabindex="-1" role="dialog" aria-labelledby="AddUniversModal" aria-hidden="true">
+    <div class="modal fade mx-auto" id="AddVisiteModal" tabindex="-1" role="dialog" aria-labelledby="AddUniversModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -66,6 +66,7 @@
                         {{ form_row(form.user) }}
                         {{ form_row(form.createdAt) }}
                         {{ form_row(form.content) }}
+                        {{ form_row(form.contentdetails) }}
               
                     </div>
                     <div class="modal-footer">
@@ -87,8 +88,7 @@
                     <th scope="col">Société</th>
                     <th scope="col">Date de la visite</th>
                     <th scope="col">Résumé</th>
-                    <th scope="col">Voir</th>
-                    <th scope="col">Modifier</th>
+                    <th scope="col">Voir/Modifier</th>
                     <th scope="col">Supprimer</th>
                     
                  
@@ -105,14 +105,16 @@
                        
                         
                         
+                        
                         <td class="table__data--view align-middle">
-                            <a href="{{ path('tech_visites_index') }}"><i class="fa fa-eye view__icon"></i></a>
+                            <a href="{{ path('tech_visite_update', {'id' : visite.id} ) }}"><i class="fa fa-edit edit__icon"></i></a>
                         </td>
-                        <td class="table__data--view align-middle">
-                            <a href="{{ path('tech_visites_index') }}"><i class="fa fa-edit edit__icon"></i></a>
-                        </td>
-                        <td class="table__data--view align-middle">
-                            <a href="{{ path('tech_visites_index') }}"><i class="fa fa-trash-o delete__icon"></i></a>
+                       
+                        <td class="table__data--delete align-middle">
+                            <form action="{{ path('tech_visite_delete', {'id' : visite.id} ) }}" method="post" onsubmit="return confirm('Voulez vous vraiment supprimer cette visite ?');">
+                                <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}">
+                                <button type="submit" class=" justify-content-center bg-transparent"><i class="fa fa-trash-o delete__icon"></i></button>
+                            </form>
                         </td>
                        
                     </tr>
