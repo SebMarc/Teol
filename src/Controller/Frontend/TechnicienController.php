@@ -226,7 +226,7 @@ class TechnicienController extends AbstractController
                 'Votre visite a été correctement intégrée!'
             );
 
-            
+            return $this->redirectToRoute('tech_visites_index');   
         }
 
         return $this->render('frontend/tech/tech_visites_index.html.twig', [
