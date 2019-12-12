@@ -197,7 +197,7 @@ class TechnicienController extends AbstractController
         }
         elseif ($searchDate) {
             $visites = $paginator->paginate(
-                $userRepository->findByDateVisiteByTechnicien($searchDate, $user->getId()),
+                $vr->findByDateVisiteByTechnicien($searchDate, $user->getId()),
                 $request->query->getInt('page', 1),
                 8
             );} 

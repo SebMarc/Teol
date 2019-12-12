@@ -5,6 +5,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 {% endblock %}
 
 {% block header %}
@@ -38,7 +39,8 @@
     </form>
 
     <form class="form-inline" action="{{ path('tech_visites_index') }}" method="POST">
-        <input class="form-control mr-sm-2" type="search" name="date" placeholder="Par date" aria-label="Search" minlength=3>
+        
+        <input type="text" id="picker" name="date" aria-label="Search" class="form-control mr-sm-2">
 
         <button class="btn btn-dark my-2 my-sm-0" type="submit">Lancer</button>
     </form>
@@ -129,4 +131,21 @@
             {{ knp_pagination_render(visites) }}
         </div>
     </div>
+
+
 {% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    $('#picker').datetimepicker({
+        timepicker: false,
+        datepicker: true,
+        format: 'Y-m-d',
+        value: '2019-12-12',
+        weeks: true
+    })
+</script>
+{% endblock %}
+
