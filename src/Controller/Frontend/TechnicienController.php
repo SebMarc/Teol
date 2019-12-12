@@ -191,13 +191,13 @@ class TechnicienController extends AbstractController
 
         if($searchSociety) {
             $visites = $paginator->paginate(
-                $vr->findByPartialSocietyVisiteByTechnicien($searchSociety, $user->getEmail()),
+                $vr->findByPartialSocietyVisiteByTechnicien($searchSociety, $user->getId()),
                 $request->query->getInt('page', 1),8
         );
         }
         elseif ($searchDate) {
             $visites = $paginator->paginate(
-                $userRepository->findByPartialLastnameAllClientByTechnicien($searchDate, $user->getEmail()),
+                $userRepository->findByDateVisiteByTechnicien($searchDate, $user->getId()),
                 $request->query->getInt('page', 1),
                 8
             );} 

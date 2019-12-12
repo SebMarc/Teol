@@ -19,19 +19,6 @@ class VisiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Visite::class);
     }
 
-    public function findByPartialSocietyVisiteByTechnicien($term, $t) 
-    {
-        $qb = $this    ->createQueryBuilder('v')
-                        ->where('v.user = :searchSociety')
-                        ->andWhere('v.tech = :tech')
-                        ->setParameter('searchSociety',  '%' . $term . '%')
-                        ->setParameter('tech', $t)
-                        ->orderBy('v.user', 'ASC');
-
-                        return $qb->getQuery()->getResult();
-    }
-
-   
     public function findAllVisiteByTechnicien($t) {      
         return $this->createQueryBuilder('v')
         ->where('v.tech = :tech')
@@ -39,7 +26,35 @@ class VisiteRepository extends ServiceEntityRepository
         ->orderBy('v.createdAt', 'ASC')
         ->getQuery()
         ->getResult();
-     }
+    }
+
+    public function findByPartialSocietyVisiteByTechnicien($term, $t) 
+    {
+        $qb = $this     ->createQueryBuilder('v')
+                        ->innerJoin('v.user', 'vu')
+                        ->addSelect('vu')
+                        ->where('vu.society LIKE :searchSociety')
+                        ->andWhere('v.tech = :tech')
+                        ->setParameter('searchSociety',  '%' . $term . '%')
+                        ->setParameter('tech', $t)
+                        ->orderBy('v.user', 'ASC');
+
+                        return $qb->getQuery()->getResult();
+    }
+    public function findByDateVisiteByTechnicien($term, $t) 
+    {
+        $qb = $this     ->createQueryBuilder('v')
+                        ->where('v.createdAt LIKE :searchDate')
+                        ->andWhere('v.tech = :tech')
+                        ->setParameter('searchDate',  '%' . $term . '%')
+                        ->setParameter('tech', $t)
+                        ->orderBy('v.user', 'ASC');
+
+                        return $qb->getQuery()->getResult();
+    }
+
+   
+    
 
     // /**
     //  * @return Visite[] Returns an array of Visite objects
