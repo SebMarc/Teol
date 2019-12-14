@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supervision Exploitation{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+    {% include 'frontend/supervision/layout/_supervision_header.html.twig' %}
+{% endblock %}
+
+{% block body %}
+<h1 class="text-center">Tableau de Bord - Supervision Exploitation</h1>
+
+
+    <div class="container d-flex col-12 justify-content-center">
+
+        
+        <div class="justify-content-around text-center col-4">
+            <div><h2>Magasin</h2></div>
+            <div>
+            <a href="#" class="col-6 btn btn-warning mb-4">Rapport Magasins</a>
+            </div>
+        </div>
+       
+    </div>
+
+{% endblock %}

@@ -28,6 +28,7 @@ class CommandeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
         ->where('c.tech = :tech')
         ->setParameter('tech', $t)
+        ->orderBy('c.createdAt', 'DESC')
         ->getQuery();  
     }
 
@@ -41,6 +42,7 @@ class CommandeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
         ->where('c.customer = :cust')
         ->setParameter('cust', $t)
+        ->orderBy('c.createdAt', 'DESC')
         ->getQuery();  
     }
 
@@ -77,6 +79,18 @@ class CommandeRepository extends ServiceEntityRepository
                         ->orderBy('c.number', 'DESC');
                       
                        return $qb->getQuery()->getResult();
+    }
+
+    public function findByDateOrderByTechnicien($term, $t) 
+    {
+        $qb = $this     ->createQueryBuilder('c')
+                        ->where('c.createdAt LIKE :searchDate')
+                        ->andWhere('c.tech = :tech')
+                        ->setParameter('searchDate',  '%' . $term . '%')
+                        ->setParameter('tech', $t)
+                        ->orderBy('c.customer', 'ASC');
+
+                        return $qb->getQuery()->getResult();
     }
 
     // /**

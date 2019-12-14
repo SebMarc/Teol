@@ -5,6 +5,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 {% endblock %}
 
 {% block header %}
@@ -30,6 +31,15 @@
     <form class="form-inline" action="{{ path('tech_orders_index') }}" method="POST">
         <input class="form-control mr-sm-2" type="search" name="ordernumber" placeholder="Par numéro de commande" aria-label="Search" minlength=3>
 
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Lancer</button>
+    </form>
+    <form class="form-inline" action="{{ path('tech_orders_index') }}" method="POST">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button type="button" id="toggle" class="input-group-text ml-3"><i class="fa fa-calendar-alt"></i></button>
+                <input type="text" id="picker" name="date" aria-label="Search" placeholder="Par date" class="form-control mr-sm-2" autocomplete="off">
+             </div>
+        </div>
         <button class="btn btn-dark my-2 my-sm-0" type="submit">Lancer</button>
     </form>
     </div>

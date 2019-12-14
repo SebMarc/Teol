@@ -7,6 +7,7 @@
         {% block stylesheets %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v.5.6.3/css/all.css">
         {% endblock %}
 
     </head>
@@ -28,6 +29,24 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
         <script src="https://kit.fontawesome.com/18272388b8.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+        
+        <script>
+            $.datetimepicker.setDateFormatter('moment')
+            $.datetimepicker.setLocale('fr')
+            $('#picker').datetimepicker({
+                timepicker: false,
+                datepicker: true,
+                format: 'Y-m-d',
+                weeks: true,
+                lang: 'fr',
+                
+            })
+            $('#toggle').on('click', function() {
+                $('#picker').datetimepicker('toggle')
+            })
+        </script>
         {% endblock %}
         
        

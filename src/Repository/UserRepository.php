@@ -45,6 +45,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
         ->where('u.technicien = :tech')
         ->setParameter('tech', $t)
+        ->orderBy('u.society', 'ASC')
         ->getQuery();
  
     }
@@ -68,6 +69,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
         ->where('u.roles LIKE :role')
         ->setParameter('role','%"'.'ROLE_MEMBER'.'"%')
+        ->orderBy('u.society', 'ASC')
+        ->getQuery();
+        
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllMemberOnlyGlobalEncours() :Query {   
+        return $this->createQueryBuilder('u')
+        ->where('u.roles LIKE :role')
+        ->setParameter('role','%"'.'ROLE_MEMBER'.'"%')
+        ->orderBy('u.encours', 'ASC')
         ->getQuery();
         
     }
@@ -88,6 +102,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
         ->where('u.roles LIKE :role')
         ->setParameter('role','%ROLE_TECH%')
+        ->orderBy('u.lastname', 'ASC')
         ->getQuery();
         
        
@@ -110,6 +125,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ->where('u.technicien = :tech')
         ->setParameter('tech', $t)
         ->orderBy('u.encours', 'ASC')
+        ->getQuery();
+     }
+
+     /**
+     * @return Query
+     */
+    public function findEncoursBySociety($term) :Query {      
+        return $this->createQueryBuilder('u')
+        ->where('u.society LIKE :searchSociety')
+        ->setParameter('searchSociety',  '%' . $term . '%')
         ->getQuery();
      }
 

@@ -23,7 +23,7 @@ class VisiteRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('v')
         ->where('v.tech = :tech')
         ->setParameter('tech', $t)
-        ->orderBy('v.createdAt', 'ASC')
+        ->orderBy('v.createdAt', 'DESC')
         ->getQuery()
         ->getResult();
     }

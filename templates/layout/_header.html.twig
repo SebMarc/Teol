@@ -117,8 +117,11 @@
                                             <a href="{{ path('tech_profil') }}" class="dropdown-item">Mon compte</a>
                                             <a href="#" class="dropdown-item">Documentation</a>
                                         {% endif %} 
+                                        {% if is_granted('ROLE_SUPERVISEUR') %}
+                                            <a href="{{ path('supervision_index') }}" class="dropdown-item">Supervision Exploitation</a>
+                                        {% endif %} 
                                         {% if is_granted('ROLE_ADMIN') %}
-                                            <a href="{{ path('admin_homepage') }}" class="dropdown-item">Administration</a>
+                                            <a href="{{ path('admin_homepage') }}" class="dropdown-item">Administration du Site</a>
                                         {% endif %}
                                         {% if is_granted('ROLE_MEMBER') %}
                                             <a href="{{ path('user_profil') }}" class="dropdown-item">Mon profil</a>

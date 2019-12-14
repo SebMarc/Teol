@@ -98,19 +98,26 @@ class TechnicienController extends AbstractController
 
         $searchorderNumber = $request->request->get('ordernumber');
         $searchMember = $request->request->get('member');
+        $searchDate = $request->request->get('date');
 
         if ($searchorderNumber) {
             $orders = $paginator->paginate(
                 $cr->findByOrderNumber($searchorderNumber, $this->getUser()->getId()),
                 $request->query->getInt('page', 1),
-                8
+                15
             );}
             elseif ($searchMember) {
                 $orders = $paginator->paginate(
                     $cr->findByMember($searchMember,$this->getUser()->getId()),
                     $request->query->getInt('page', 1),
-                    8
+                    15
                 );}
+                elseif ($searchDate) {
+                    $orders = $paginator->paginate(
+                        $cr->findByDateOrderByTechnicien($searchDate, $user->getId()),
+                        $request->query->getInt('page', 1),
+                        15
+                    );} 
             else {
                 $orders= $paginator->paginate(
                 $cr->findAllOrderByTechnicien($this->getUser()->getId()),

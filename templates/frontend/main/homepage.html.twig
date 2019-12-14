@@ -8,7 +8,12 @@
 {% endblock %}
 
 {% block body %}
-
+<div>
+<a class="weatherwidget-io" href="https://forecast7.com/en/47d285d00/bourgogne-franche-comte/" data-label_1="BOURGOGNE-FRANCHE-COMTÉ" data-icons="Climacons Animated" data-theme="orange" >BOURGOGNE-FRANCHE-COMTÉ</a>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
+</div>
 <div>
 {# Flash Message{#}
     {% for label, messages in app.flashes(['success', 'warning', 'danger', 'info']) %}
@@ -114,6 +119,7 @@ Il est responsable du personnel et de la mise en oeuvre des décisions prises pa
 <img src="{{ asset('asset/image/carte-implantation.jpg') }}" alt="Implantation Teol" class="d-block mx-auto rounded">
 
 </div>
+
 
 
 {% endblock %}

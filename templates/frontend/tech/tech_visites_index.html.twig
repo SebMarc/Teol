@@ -6,7 +6,7 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v.5.6.3/css/all.css">
+    
 {% endblock %}
 
 {% block header %}
@@ -139,24 +139,5 @@
 
 {% endblock %}
 
-{% block javascripts %}
-{{ parent() }}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-<script>
-    $.datetimepicker.setDateFormatter('moment')
-    $.datetimepicker.setLocale('fr')
-    $('#picker').datetimepicker({
-        timepicker: false,
-        datepicker: true,
-        format: 'Y-m-d',
-        weeks: true,
-        lang: 'fr',
-        
-    })
-    $('#toggle').on('click', function() {
-        $('#picker').datetimepicker('toggle')
-    })
-</script>
-{% endblock %}
+
 

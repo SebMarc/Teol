@@ -102,7 +102,8 @@ class AppFixtures extends Fixture
                         $order  ->setNumber($stringnumber)
                                 ->setAmount($faker->numberBetween(1000, 9000))                                
                                 ->setTech($randomtechnicien)                        
-                                ->setCustomer($customer);
+                                ->setCustomer($customer)
+                                ->setcreatedAt($faker->dateTimeThisDecade($max = 'now', $timezone = null));
                         
                         $manager->persist($order)
                         ;
