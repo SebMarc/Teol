@@ -2,6 +2,10 @@
 
 namespace App\Controller\Frontend;
 
+use App\Entity\User;
+use App\Form\AdherentChoiceFormType;
+use App\Form\TechnicienChoiceFormType;
+use App\Repository\CommandeRepository;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,6 +68,50 @@ class SupervisionController extends AbstractController
     }
 
     /**
+     * @Route("/supervision/techniciens/commandes", name="supervision_techniciens_commandes")
+     */
+    public function suptechcommandes(CommandeRepository $cr, PaginatorInterface $paginator, Request $request) {
+
+        $searchTechnicien = $request->request->get('technicien_choice_form');
+ 
+        $techForm = $this->createForm(TechnicienChoiceFormType::class);
+        $techForm->handleRequest($request);
+       
+        
+        if ($techForm->isSubmitted() && $techForm->isValid()) {
+            if ($techForm->isSubmitted() && $techForm->isValid() && isset($searchTechnicien['technicien']) && isset($searchTechnicien['adherent'])) {
+                $orders = $paginator->paginate(
+                    $cr->findByMemberSupervision($searchTechnicien['adherent'], $searchTechnicien['technicien']),
+                    $request->query->getInt('page', 1),
+                    15
+                );
+            }
+            $orders = $paginator->paginate(
+            $cr->findAllOrderByTechnicienSupervision($searchTechnicien['technicien']),
+            $request->query->getInt('page', 1),
+            15
+            );
+        } 
+           
+            else {
+                $orders= $paginator->paginate($cr->findAll(),
+                $request->query->getInt('page', 1), 15
+            );
+            }
+            dump($searchTechnicien);
+            //dump($orders);
+            //dump($searchTechnicien['adherent']);
+            dump($searchTechnicien['technicien']);
+    
+        return $this->render('frontend/supervision/supervision_techniciens_commandes.html.twig', [
+            'orders' =>$orders,
+            'techform'  => $techForm->createView(),
+            
+        ]);
+    }
+
+
+    /**
      * @Route("/supervision/adherents/index", name="supervision_adherents_index")
      */
     public function supadhindex() {
@@ -76,4 +124,6 @@ class SupervisionController extends AbstractController
     public function supmagindex() {
         return $this->render('frontend/supervision/supervision_magasins_index.html.twig');
     }
+
+    
 }

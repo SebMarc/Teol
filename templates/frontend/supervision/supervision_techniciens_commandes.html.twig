@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commandes Clients - Technicien{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('asset/css/admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+    {% include 'frontend/supervision/layout/_supervision_header.html.twig' %}
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+<h1 class="text-center mt-4 mb-4">Commandes Clients - Technicien</h1>
+
+    <div class="d-flex justify-content-center mb-2 ">
+    
+        {{ form_start(techform) }}
+        <div class="d-flex">
+        {{ form_row(techform.technicien) }}
+        {{ form_end(techform) }}
+        <button class="btn btn-warning  mt-0 ml-3" type="submit">Lancer</button>
+        <a href="{{ path('supervision_techniciens_commandes') }}" class="ml-3 "><button class="btn btn-success mt-0"> Initialiser les filtres </button></a>
+        </div>
+{#}
+         {{ form_start(adhform) }}
+        <div class="d-flex">
+        {{ form_row(adhform.adherent) }}
+       
+        <button class="btn btn-dark  mr-3" type="submit">Lancer</button>
+        {{ form_end(adhform) }}
+        </div>
+        {#{{ form(form)}}{#}
+ {#}      
+   
+    {#<form class="form-inline" action="{{ path('supervision_techniciens_commandes') }}" method="POST">
+        <input class="form-control mr-sm-2" type="search" name="member" placeholder="Par adhérent" aria-label="Search" minlength=3>
+
+        <button class="btn btn-dark my-2 my-sm-0 mr-3" type="submit">Lancer</button>
+    </form>
+
+    <form class="form-inline" action="{{ path('supervision_techniciens_commandes')}}" method="POST">
+        <input class="form-control mr-sm-2" type="search" name="ordernumber" placeholder="Par numéro de commande" aria-label="Search" minlength=3>
+
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Lancer</button>
+    </form>
+    <form class="form-inline" action="{{ path('supervision_techniciens_commandes') }}" method="POST">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button type="button" id="toggle" class="input-group-text ml-3"><i class="fa fa-calendar-alt"></i></button>
+                <input type="text" id="picker" name="date" aria-label="Search" placeholder="Par date" class="form-control mr-sm-2" autocomplete="off">
+             </div>
+        </div>
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Lancer</button>
+    </form>{#}
+    </div>
+
+    <div class="container-fluid text-center">
+
+        <div class="d-flex justify-content-around flex-wrap">
+
+            <table class="table table-striped  text-center tableau" >
+                <thead>
+                    <tr class="trhead">
+                        <th scope="col">Id</th>
+                        <th scope="col">Date de commande</th>
+                        <th scope="col">Adhérent</th>
+                        <th scope="col">N° de commande</th>
+                        <th scope="col">Montant</th>
+                        <th scope="col">Voir</th>
+                        
+                    
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for order in orders %}
+                        <tr class="align-middle">
+                            <td class="align-middle">{{ order.id }}</td>
+                            <td class="align-middle">{{ order.createdAt|date('d-m-Y') }}</td>
+                            <td class="align-middle"><a href="{{ path('tech_client_view', {'id' : order.customer.id}) }}">{{ order.customer.society }}</a></td>
+                            <td class="align-middle">{{ order.number }}</td>
+                            <td class="align-middle">{{ order.amount }}</td>
+                            <td class="table__data--view align-middle">
+                                <a href="#"><i class="fa fa-eye view__icon"></i></a>
+                            </td>                    
+                        </tr>
+                    {% else %}
+                        <tr class="text-center">
+                            <td colspan="8">Aucun résultat !</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            {{ knp_pagination_render(orders) }}
+        </div>
+
+    </div>
+{% endblock %}

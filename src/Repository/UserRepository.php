@@ -52,25 +52,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function findAllClientByTechnicienQuery($t) 
     {
-        $qb = $this ->createQueryBuilder('u')
+       return $this ->createQueryBuilder('u')
                     ->where('u.technicien = :tech')
-                    ->setParameter('tech', $t)
-                    ->getQuery()
-                    ->getResult();
-                    return $qb;
- 
+                    ->setParameter('tech', $t);
+     
     }
 
     
     /**
      * @return Query
      */
-    public function findAllMemberOnly() :Query {   
-        return $this->createQueryBuilder('u')
-        ->where('u.roles LIKE :role')
-        ->setParameter('role','%"'.'ROLE_MEMBER'.'"%')
-        ->orderBy('u.society', 'ASC')
-        ->getQuery();
+    public function findAllMemberOnly() :Query
+    {   
+        return $this    ->createQueryBuilder('u')
+                        ->where('u.roles LIKE :role')
+                        ->setParameter('role','%"'.'ROLE_MEMBER'.'"%')
+                        ->orderBy('u.society', 'ASC')
+                        ->getQuery();
         
     }
 
@@ -84,6 +82,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ->orderBy('u.encours', 'ASC')
         ->getQuery();
         
+        
     }
 
 
@@ -91,6 +90,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
         ->where('u.roles LIKE :role')
         ->setParameter('role','%ROLE_TECH%');
+      
         
     }
 

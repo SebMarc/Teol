@@ -32,6 +32,15 @@ class CommandeRepository extends ServiceEntityRepository
         ->getQuery();  
     }
 
+    public function findAllOrderByTechnicienSupervision($t) 
+    {
+        $qb = $this ->createQueryBuilder('c')
+                    ->where('c.tech = :tech')
+                    ->setParameter('tech', $t)
+                    ->orderBy('c.createdAt', 'DESC');
+                    return $qb->getQuery()->getResult();
+    }
+
   
 
      /**
@@ -67,6 +76,8 @@ class CommandeRepository extends ServiceEntityRepository
                        return $qb->getQuery()->getResult();
     }
 
+    
+
     public function findByMember($term, $t)
      {
         $qb = $this     ->createQueryBuilder('c')
@@ -75,6 +86,20 @@ class CommandeRepository extends ServiceEntityRepository
                         ->where('cu.society LIKE :searchCustomer')
                         ->andWhere('c.tech = :tech')
                         ->setParameter('searchCustomer', '%' . $term . '%')
+                        ->setParameter('tech', $t )
+                        ->orderBy('c.number', 'DESC');
+                      
+                       return $qb->getQuery()->getResult();
+    }
+
+    public function findByMemberSupervision($term, $t)
+     {
+        $qb = $this     ->createQueryBuilder('c')
+                        ->innerJoin('c.customer', 'cu')
+                        ->addSelect('cu')
+                        ->where('cu.id LIKE :searchCustomer')
+                        ->andWhere('c.tech = :tech')
+                        ->setParameter('searchCustomer', $term)
                         ->setParameter('tech', $t )
                         ->orderBy('c.number', 'DESC');
                       
