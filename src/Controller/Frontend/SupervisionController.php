@@ -93,14 +93,12 @@ class SupervisionController extends AbstractController
                     15
                     );
             }
-            
-        } 
-           
-            else {
-                $orders= $paginator->paginate($cr->findAll(),
-                $request->query->getInt('page', 1), 15
-            );
-            }
+        }  
+        else {
+            $orders= $paginator->paginate($cr->findAll(),
+            $request->query->getInt('page', 1), 15
+        );
+        }
     
         return $this->render('frontend/supervision/supervision_techniciens_commandes.html.twig', [
             'orders' =>$orders,

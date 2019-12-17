@@ -87,7 +87,7 @@
                         <tr class="align-middle">
                             <td class="align-middle">{{ order.id }}</td>
                             <td class="align-middle">{{ order.createdAt|date('d-m-Y') }}</td>
-                            <td class="align-middle"><a href="{{ path('tech_client_view', {'id' : order.customer.id}) }}">{{ order.customer.society }}</a></td>
+                            <td class="align-middle">{{ order.customer.society }}</td>
                             <td class="align-middle">{{ order.number }}</td>
                             <td class="align-middle">{{ order.amount }}</td>
                             <td class="table__data--view align-middle">
@@ -109,3 +109,4 @@
 
     </div>
 {% endblock %}
+
