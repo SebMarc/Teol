@@ -79,18 +79,21 @@ class SupervisionController extends AbstractController
        
         
         if ($techForm->isSubmitted() && $techForm->isValid()) {
-            if ($techForm->isSubmitted() && $techForm->isValid() && isset($searchTechnicien['technicien']) && isset($searchTechnicien['adherent'])) {
+            if (isset($searchTechnicien['technicien']) && isset($searchTechnicien['adherent'])) {
                 $orders = $paginator->paginate(
                     $cr->findByMemberSupervision($searchTechnicien['adherent'], $searchTechnicien['technicien']),
                     $request->query->getInt('page', 1),
                     15
                 );
             }
-            $orders = $paginator->paginate(
-            $cr->findAllOrderByTechnicienSupervision($searchTechnicien['technicien']),
-            $request->query->getInt('page', 1),
-            15
-            );
+            else {
+                $orders = $paginator->paginate(
+                    $cr->findAllOrderByTechnicienSupervision($searchTechnicien['technicien']),
+                    $request->query->getInt('page', 1),
+                    15
+                    );
+            }
+            
         } 
            
             else {
@@ -98,10 +101,6 @@ class SupervisionController extends AbstractController
                 $request->query->getInt('page', 1), 15
             );
             }
-            dump($searchTechnicien);
-            //dump($orders);
-            //dump($searchTechnicien['adherent']);
-            dump($searchTechnicien['technicien']);
     
         return $this->render('frontend/supervision/supervision_techniciens_commandes.html.twig', [
             'orders' =>$orders,

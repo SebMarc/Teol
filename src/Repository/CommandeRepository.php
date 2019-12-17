@@ -95,9 +95,9 @@ class CommandeRepository extends ServiceEntityRepository
     public function findByMemberSupervision($term, $t)
      {
         $qb = $this     ->createQueryBuilder('c')
-                        ->innerJoin('c.customer', 'cu')
-                        ->addSelect('cu')
-                        ->where('cu.id LIKE :searchCustomer')
+                        //->innerJoin('c.customer', 'cu')
+                        //->addSelect('cu')
+                        ->where('c.customer = :searchCustomer')
                         ->andWhere('c.tech = :tech')
                         ->setParameter('searchCustomer', $term)
                         ->setParameter('tech', $t )
