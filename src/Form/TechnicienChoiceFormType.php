@@ -60,7 +60,7 @@ class TechnicienChoiceFormType extends AbstractType
                    'auto_initialize'=> false,
                    'choice_label'   => 'society',
                    'query_builder'  => function(UserRepository $repository) use($tech)  {
-                                    return $repository->findAllClientByTechnicienQuery($tech);
+                                    return $repository->findAllClientByTechnicienSupervision($tech);
                   }
                   
                ]);

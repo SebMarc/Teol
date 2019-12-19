@@ -52,6 +52,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function findAllClientByTechnicienQuery($t) 
     {
+       $qb =  $this ->createQueryBuilder('u')
+                    ->where('u.technicien = :tech')
+                    ->setParameter('tech', $t);
+                    return $qb->getQuery()->getResult();
+     
+    }
+
+    public function findAllClientByTechnicienSupervision($t) 
+    {
        return $this ->createQueryBuilder('u')
                     ->where('u.technicien = :tech')
                     ->setParameter('tech', $t);
