@@ -70,7 +70,7 @@ class SupervisionController extends AbstractController
     /**
      * @Route("/supervision/techniciens/commandes", name="supervision_techniciens_commandes")
      */
-    public function suptechcommandes(CommandeRepository $cr, PaginatorInterface $paginator, Request $request) {
+    public function suptechcommandes(CommandeRepository $cr, PaginatorInterface $paginator, Request $request, UserRepository $ur) {
 
         $searchTechnicien = $request->request->get('technicien_choice_form');
  
@@ -79,6 +79,9 @@ class SupervisionController extends AbstractController
        
         
         if ($techForm->isSubmitted() && $techForm->isValid()) {
+
+            $tech = $ur->find($searchTechnicien['technicien']);
+
             if (isset($searchTechnicien['technicien']) && isset($searchTechnicien['adherent'])) {
                 $orders = $paginator->paginate(
                     $cr->findByMemberSupervision($searchTechnicien['adherent'], $searchTechnicien['technicien']),
@@ -101,7 +104,8 @@ class SupervisionController extends AbstractController
         }
     
         return $this->render('frontend/supervision/supervision_techniciens_commandes.html.twig', [
-            'orders' =>$orders,
+            'orders'    =>$orders,
+            'tech'      =>$tech,
             'techform'  => $techForm->createView(),
             
         ]);
