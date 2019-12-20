@@ -80,9 +80,10 @@ class SupervisionController extends AbstractController
         
         if ($techForm->isSubmitted() && $techForm->isValid()) {
 
-            $tech = $ur->find($searchTechnicien['technicien']);
+            
 
             if (isset($searchTechnicien['technicien']) && isset($searchTechnicien['adherent'])) {
+                $tech = $ur->find($searchTechnicien['technicien']);
                 $orders = $paginator->paginate(
                     $cr->findByMemberSupervision($searchTechnicien['adherent'], $searchTechnicien['technicien']),
                     $request->query->getInt('page', 1),
@@ -90,6 +91,7 @@ class SupervisionController extends AbstractController
                 );
             }
             else {
+                $tech = $ur->find($searchTechnicien['technicien']);
                 $orders = $paginator->paginate(
                     $cr->findAllOrderByTechnicienSupervision($searchTechnicien['technicien']),
                     $request->query->getInt('page', 1),
@@ -98,6 +100,7 @@ class SupervisionController extends AbstractController
             }
         }  
         else {
+            $tech = null;
             $orders= $paginator->paginate($cr->findAll(),
             $request->query->getInt('page', 1), 15
         );

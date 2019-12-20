@@ -41,8 +41,7 @@ class TechnicienChoiceFormType extends AbstractType
                 'query_builder' => function(UserRepository $repository)  {
                 return $repository->findAllTechnicienForm();
                 }
-                ])
-            
+                ])   
            ;
           
            $builder->get('technicien')->addEventListener(
@@ -61,17 +60,10 @@ class TechnicienChoiceFormType extends AbstractType
                    'choice_label'   => 'society',
                    'query_builder'  => function(UserRepository $repository) use($tech)  {
                                     return $repository->findAllClientByTechnicienSupervision($tech);
-                  }
-                  
-               ]);
-              
+                  }   
+               ]);       
             }
-        );
-        
-
-     
-
-       
+        ); 
     }
                 
 
